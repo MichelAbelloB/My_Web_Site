@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>MichelAbello</title>
+        <meta content="Website-MichelAbello" name="MichelAbello">
+        
+        <meta content="MichelAbello - Business Administrator" name="keywords">
+        <meta content="Professional within his field of expertise. With extensive knowledge in design, programming and the administrative area." name="description">
+
+        <!-- Favicon -->
+        <link rel="icon" href="img/icon.png">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="51">
+
+        <!-- checkbox Language -->
+
+        <!--<div class="Language">
+            <span class="en">Español</span>
+            <input type="checkbox" class="check">
+            <span class="es">Ingles</span>
+        </div>-->
+
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">
+                    <div class="center-desk">
+                        <div class="logo">
+                           <a href="index.html"><img src="img/logo.png"/></a>
+                        </div>
+                    </div>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="index.html" class="nav-item nav-link active">Regresar al Inicio</a>
+                        <a href="#portfolio_start" class="nav-item nav-link active">Introducción</a>
+                        <a href="#portfolio_end" class="nav-item nav-link active">Recursos y Repositorios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Deko Start -->
+        <div class="Omega" id="home">
+            <div class="container-fluid">
+                <div class="hero-image-Ecobambu"></div>
+            </div>
+        </div>
+        <!-- Deko End -->
+        
+        <!-- Ecobambu_Wed Start -->
+        <div class="portfolio_start" id="portfolio_start">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <p>Analisis de datos</p>
+                <h2>Data Viewer</h2>
+            </div>
+                <div class="container">
+                    <div class="container banner-text">
+                        <p>
+                            Data viewer es una interfaz gráfica que permite visualizar datos de SQL de manera descentralizada, con una interfaz gráfica 
+                            amigable y funcional para actividades básicas de operación. En los cuales podemos encontrar: agregar nuevos datos, eliminar 
+                            datos, modificar datos, importar una base nueva o exportar datos en formato csv, xlsx y pdf.
+                        </p>
+                        <div class="home_Eco_banner">
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Interfaz_Data_Viewer.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Para las disposiciones iniciales de la interfaz, se tuvo presente que fuera una interfaz fácil y funcional. Donde 
+                                    la prioridad era disponer de tres funciones principales de frecuente uso y dos complementarias de uso moderado. 
+                                    Para ello se estructuro en tres scripts, las funcionalidades de la interfaz; donde se estableció que, en el primer 
+                                    script, se realizara la conexión con la base SQL y se generaría todas las funciones iniciales de búsqueda. En el 
+                                    segundo script se dispuso el iniciador de la interfaz y de sus consecuentes scripts ligados. En el ultimo script 
+                                    se estructura toda la visual de la interfaz, los botones, las funciones y las acciones complementarias de la interfaz.
+                                    <br></br>
+                                    La base utilizada cuenta con diferentes parámetros, que en este caso fueron tomados en cuenta para estructurar la 
+                                    lógica de la interfaz. Dentro de estos componentes encontramos que la base tiene datos numéricos, texto, caracteres, 
+                                    fechas e indicadores únicos de producto. Los cuales en este caso permiten identificar cada de una de las compras.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Interfaz_Data_SQL.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    La composición del primer script esta centrado en dos librerías <a class=inter href="https://pypi.org/project/PyMySQL/">pymysql</a> para la conexión e integración con SQL y <a class=inter href="https://pypi.org/project/plyer/">plyer</a>
+                                    para la generación de notificaciones. Para ello primero se definió una función que permitiera la conexión a la base de datos SQL, 
+                                    después se definió los parámetros de host, usuario, contraseña y nombre de la base de datos. Ya realizada la conexión 
+                                    con la base, se define los datos de consulta mediante una lista de caracteres, los cuales están ligados a la función 
+                                    <a class=inter>consulta_dato</a>, la cual nos devuelve los datos ingresados en la base.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Code_Data_viewer_1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    La función <a class=inter>consulta_dato</a> inicialmente realiza lectura de la base de datos SQL mediante la selección de la base y su consecuente 
+                                    tabla seleccionada. Una vez leído los datos en su totalidad se concadena una notificación exitosa de ingreso a la base. 
+                                    <br></br>
+                                    Para la búsqueda, eliminación, inserción y modificación de datos, se utilizó parámetros similares de ingreso y salida para la definición de cada 
+                                    función. En el caso de la búsqueda de datos se crea la función <a class=inter>buscar_dato</a>, el cual toma como referencia el Id de la tabla, es decir toma como 
+                                    referencia la primera columna de la tabla y con ella llama todos los datos que tengan un Id. En este caso como la Id es un valor único para cada uno de los 
+                                    datos, no se repite la información dentro de la búsqueda.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Code_Data_viewer_2.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Para complementar la funcionalidad de cada mecanismo creado, se estructuran funciones generales de múltiple uso, las cuales tiene como objetivo integrar interacciones 
+                                    iniciales o finales de manera homogénea. Un claro ejemplo de ello es la función <a class="inter">cancelar</a>, la cual se organiza mediante un mensaje de alerta con
+                                    dos posibles respuestas a la acción realizada. Una realiza la acción y la otra deniega la interacción. Sin embargo, aunque se realizan acciones de base diferentes, en 
+                                    ambas interacciones se realiza un barrido, una inhabilitación de barras y una activación de botones.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Interfaz_Data_Viewer_3.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Dentro de las funciones mas relevantes encontramos eliminar y crear un nuevo registro, estas dos funciones poseen una estructura similar de interacción, pero de ejecución 
+                                    diferente. En el caso de la función eliminar se realizan dos métodos; donde el primero interactúa con los datos seleccionados realizando lectura de la fila y de sus 
+                                    respectivas columnas. Una vez comprobado que existen datos, se genera una alerta con dos posibles respuestas a la acción realizada donde una realiza la acción y la otra 
+                                    la deniega. Si la selección es afirmativa la segunda función comprueba los datos a eliminar y realiza la depuración de los datos en la base.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Interfaz_Data_Viewer_2.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Entendiendo la lógica utilizada dentro de la función <a class="inter">consulta_dato</a>. Se realiza la función <a class="inter">modificar_dato</a>, en este caso se realiza dos lógicas para la interacción 
+                                    y ejecución de la función. La primera realiza el llamado de todas las columnas definidas en la base, para ello se concadena con la segunda función, la cual define los 
+                                    parametros del botón modificar y con ello se toman los datos visualizados en Data Viewer y se transcriben en las barras de texto de la interfaz. Una vez modificado los 
+                                    datos se insertan los cambios en la misma columna seleccionada y se actualizan mediante la primera función los datos en la base.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Interfaz_Data_Viewer_1.png" alt="">
+                                </div>
+                            </div>    
+        			    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ecobambu_Wed End -->
+
+        <div class="portfolio_end" id="portfolio_end">
+            <div class="container">
+                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                    <p>Recursos y Repositorios</p>
+                    <h2>Herramientas Utilizadas</h2>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/Python.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Python - Libreria tkinter
+                        </h6>
+                    </div>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/Python.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Python - Libreria Plyer                       
+                        </h6>
+                    </div>  
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/Python.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Python - Libreria Pymysql                        
+                        </h6>
+                    </div>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/SQL.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            HeidiSQL                     
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Start -->
+        <div class="links" id="links">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <a class="btn" href="https://github.com/MichelAbello78/SQL_Data_Interface">Código </a>
+            </div>
+        </div>
+        <!-- Links End -->
+
+        <!-- Footer Start -->
+        <div class="footer wow fadeIn" data-wow-delay="0.3s">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="footer-info">
+                        <img src="img/banner end.png"/>
+                        <div class="footer-menu">
+                        </div>
+                        <div class="footer-social">
+                            <a href="https://www.behance.net/gallery/142669769/Personal-Branding"><i class="fab fa-behance"></i></a>
+                            <a href="https://www.linkedin.com/in/michel-abello/"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/MichelAbello78"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container copyright">
+                    <p>&copy; <a href="#">Michel Abello</a>, Todos los derechos reservados | Diseñado por Michel.A</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        
+        <!-- Back to top button -->
+        <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/typed/typed.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <!-- Lenguage Javascript -->
+        <script src="js/language.js"></script>
+    </body>
+</html>
