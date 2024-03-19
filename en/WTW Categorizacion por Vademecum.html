@@ -72,90 +72,110 @@
         <div class="portfolio_start" id="portfolio_start">
         <div class="container">
             <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <p>Process automation</p>
-                <h2>Automation Single Notification Format</h2>
+                <p>Analysis of data</p>
+                <h2>WTW / Categorization by Vademecum</h2>
             </div>
                 <div class="container">
                     <div class="container banner-text">
                         <p>
-                            For the single news requirement, we wanted to standardize dynamics and processes that make it easier for staff to manage the format.
-                             single notification, without generating errors in filling out information or that would generate reprocessing or serious conduct due to false
-                             notification. That is why a filling format was created in an Excel template through which it could be standardized.
-                             the order of filling for the required fields and define the format of date and text fields for
-                             the formation of the document in PDF.
+                            Vademecum Categorization is a tool designed in Excel using Visual Basic for Applications, which aims, through different 
+                            macros, to import data into the book, categorize the vademecum, validate the different vademecums according to their 
+                            application or non-application, previews using forms for the visualization of data that apply according to the vademecum 
+                            and an export of the data that applies within a new sheet.
                         </p>
                         <div class="home_Eco_banner">
                             <div class="row h_item">
                                 <div class="bar_img">
-                                    <img class="img-fluid" src="img/formulario_1.png" alt="">
+                                    <img class="img-fluid" src="img/inicio_wtw.png" alt="">
                                 </div>
                             </div>
                             <div class="ContDip">
 								<p>
-                                    Within the data analysis visual, visuals are created automatically using macros linked to the three
-                                     raw materials available (customers, sales and products). These three groups are unified through power pivot and generated
-                                     automatically in the “Analysis” Sheet using the macro linked to the “Report Generator” button. Within the
-                                     Visuals generated for each section, bar graphs are generated to compare performance on a quarterly basis.
-                                     of the sales of the top products that have sold the most and the types of customers by gender and age. In addition to its corresponding comparison
-                                     according to their categories and types of products.
+                                    For the analysis of crude oil data, agile mechanisms were established that would allow for an analysis of several 
+                                    documents, keeping in mind that there is a base document where the crude oil would be integrated with the vademecum 
+                                    analysis and on the other hand, three different types of documents would be connected. , but with a causal relationship 
+                                    with the unique identifier of the base document. Keeping in mind that for this purpose, a macro was designed that will 
+                                    extract the three raw materials and integrate them into the base document in order to begin the second phase of the document, 
+                                    which is the analysis and differentiation of the vademecum.
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/inicio_wtw1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    To combine data from multiple Excel sources into a single file using BVA (Business Value Added), first, you connect the Excel 
+                                    data sources to the BVA platform through its interface. Data is then imported from each source into BVA and processed using 
+                                    the data manipulation tools available on the platform to merge, clean and transform the data sets as necessary. Finally, the 
+                                    combined data is exported to a new Excel file, facilitating efficient consolidation and analysis of information from various sources.
                                 </p>
 							</div>
                             <div class="row h_item">
                                 <div class="bar_img">
-                                    <img class="img-fluid" src="img/formulario_2.png" alt="">
+                                    <img class="img-fluid" src="img/inicio_wtw2.png" alt="">
                                 </div>
                             </div>
                             <div class="ContDip">
 								<p>
-                                    For the creation of the input interface and interaction tools. Macros were created for collection
-                                     information of the available cells, the clean macro is created to eliminate the temporary records in the
-                                     data cells, the save information macro is created, which allows saving the available records within the data cells.
-                                     data, as well as clearing the data cells and generating a save success notification if the save conditions
-                                     filling and data type are met.
+                                    Once the information is collected, the vademecum categorization is carried out by automating the search and comparison of codes between 
+                                    two spreadsheets within an Excel workbook. First, variables are declared to store information, such as the line counter, the last row of 
+                                    data in the "WTW" sheet, and the code variables to search for. Then, the search range is set on sheet "3". Next, a loop is started that 
+                                    goes through the rows of the "WTW" sheet starting from row 8 to the last row with data. In each iteration of the loop, the code is taken 
+                                    from column C of sheet "WTW", its correspondence is searched in the range defined in sheet "3" using Excel's VLookup function, and the 
+                                    result is assigned to the variable "code2". If the search returns no results (that is, returns an error), the value "Does not match" is 
+                                    assigned to "code2"; otherwise, "Cross" is assigned. Subsequently, the result of the comparison is written in column 13 of the "WTW" sheet.
                                 </p>
 							</div>
                             <div class="row h_item">
                                 <div class="bar_img">
-                                    <img class="img-fluid" src="img/formulario_3.png" alt="">
+                                    <img class="img-fluid" src="img/inicio_wtw3.png" alt="">
                                 </div>
                             </div>
                             <div class="ContDip">
 								<p>
-                                    The data entry interface contains dynamic visuals that allow generating temporary views according to the table provided.
-                                     on the right side. These selected data are presented in each of the spaces arranged on the left side of
-                                     This way it is possible to generate a deletion, saving and modification of the data available within the bases or the
-                                     entry of new records into the base and categorize them in their respective database.
+                                    This formula code in Excel is used to perform a conditional evaluation based on multiple conditions. Using the IF function and the AND function, 
+                                    first check if the value of the "Belongs to vademecum" column is "Not Vademecum", then check if the value of the "Vademecum1" column is "Cross", 
+                                    and finally, if the value of the "Date grouping" column is "Vademecum 1". If all of these conditions are true, the formula returns "Find", 
+                                    indicating that a significant match has been found. Otherwise, it returns "Not Applicable". This formula allows you to automate the data evaluation 
+                                    process according to multiple criteria, facilitating the identification of relevant findings in a data set.
                                 </p>
 							</div>
                             <div class="row h_item">
                                 <div class="bar_img">
-                                    <img class="img-fluid" src="img/formulario_4.png" alt="">
+                                    <img class="img-fluid" src="img/inicio_wtw4.png" alt="">
                                 </div>
                             </div>
                             <div class="ContDip">
 								<p>
-                                    For the storage and saving of information, a macro was made that, according to the data recorded in the boxes,
-                                     established TextBox variables that would take the data arranged in the box and initially store it in the database.
-                                     customer data. In this way, the data can be stored with all its generalities and later
-                                     automatically perform categorization of sales values and the type of product purchased according to the record
-                                     sole purchase of the customer in question.
+                                    Once all the data validations were completed, an interaction interface was created using an Excel form that would allow the three Vademecum to be 
+                                    categorized according to two variables “Findings” and “Not applicable.” Once one of the two options has been defined according to the Vademecum, 
+                                    the data can be exported according to each element of the list described in the corresponding cells of the "Report" worksheet, starting from the 
+                                    row indicated by "initial". After writing the values, the variable "uf" is incremented by 1 to move to the next row. This code is used to export 
+                                    data from a UserForm to an Excel sheet in an orderly and automated manner.
                                 </p>
 							</div>
                             <div class="row h_item">
                                 <div class="bar_img">
-                                    <img class="img-fluid" src="img/formulario_5.png" alt="">
+                                    <img class="img-fluid" src="img/inicio_wtw5.png" alt="">
                                 </div>
                             </div>
                             <div class="ContDip">
 								<p>
-                                    One of the primary functions of the application and that is linked transversally to all the tools
-                                     from the initial interface; is the preview function, which allows previewing data in text boxes
-                                     for the respective use of data saving, cleaning, deletion and modification tools. For the creation of
-                                     This macro took into account a defined route within the text boxes and a defined destination for data management.
-                                     Additionally, for this process, a variable was allocated that would allow the interaction of the different data sources and to
-                                     For this, the unique key of each transaction was taken for the unique and relative search of the data according to the client.
+                                    It is used to remove duplicate records in an Excel sheet. First, a variable called "value" is declared as a Long type. The code then selects 
+                                    cell A5 on the "Report" sheet. A "Do While" loop is then started and runs as long as the active cell is not empty. Inside the loop, Excel's "CountIf" 
+                                    function is used to count how many times the value of the active cell appears in column A. If the value is greater than 1 (that is, if there is more 
+                                    than one occurrence), it is removed the entire row containing the active cell. If the value is 1 (that is, if the record is unique), the selection is 
+                                    moved to the next row using "Offset". This process is repeated until duplicate records are found throughout column A. Finally, the code selects cell A5 
+                                    to ensure that the process starts from the beginning the next time it runs. In short, this code removes duplicate records in an Excel sheet, keeping only 
+                                    one instance of each unique record.
                                 </p>
-							</div> 
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/inicio_wtw6.png" alt="">
+                                </div>
+                            </div>    
         			    </div>
                     </div>
                 </div>
@@ -185,19 +205,9 @@
                     </div>
                     <div class="text-p-end">
                         <h6>
-                            Microsoft Excel
+                            Microsoft Excel                      
                         </h6>
-                    </div>
-                </div>
-                <div class="single-list flex-row d-flex">
-                    <div class="obj">
-                        <img src="img/Excel.png" alt="">
-                    </div>
-                    <div class="text-p-end">
-                        <h6>
-                            Power Pivot                     
-                        </h6>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
@@ -205,7 +215,7 @@
         <!-- Links Start -->
         <div class="links" id="links">
             <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                <a class="btn" href="https://github.com/MichelAbelloB/Creacion_Formulario_VBA">Code </a>
+                <a class="btn" href="https://github.com/MichelAbelloB/Vademecum_wtw">Code </a>
             </div>
         </div>
         <!-- Links End -->
