@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>MichelAbello</title>
+        <meta content="Website-MichelAbello" name="MichelAbello">
+        
+        <meta content="MichelAbello - Business Administrator" name="keywords">
+        <meta content="Professional within his field of expertise. With extensive knowledge in design, programming and the administrative area." name="description">
+
+        <!-- Favicon -->
+        <link rel="icon" href="img/icon.png">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="51">
+
+        <!-- checkbox Language -->
+
+        <!--<div class="Language">
+            <span class="en">Español</span>
+            <input type="checkbox" class="check">
+            <span class="es">Ingles</span>
+        </div>-->
+
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">
+                    <div class="center-desk">
+                        <div class="logo">
+                           <a href="index.html"><img src="img/logo.png"/></a>
+                        </div>
+                    </div>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="index.html" class="nav-item nav-link active">Back to top</a>
+                        <a href="#portfolio_start" class="nav-item nav-link active">Introduction</a>
+                        <a href="#portfolio_end" class="nav-item nav-link active">Resources and Repositories</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Deko Start -->
+        <div class="Omega" id="home">
+            <div class="container-fluid">
+                <div class="hero-image-Ecobambu"></div>
+            </div>
+        </div>
+        <!-- Deko End -->
+        
+        <!-- Ecobambu_Wed Start -->
+        <div class="portfolio_start" id="portfolio_start">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <p>PROCESS AUTOMATION</p>
+                <h2>Automation of sending KPIs by email</h2>
+            </div>
+                <div class="container">
+                    <div class="container banner-text">
+                        <p>                    
+                            The Excel interface was designed to facilitate the entry and organization of data necessary to generate emails with KPIs and send them 
+                            to specific recipients. The email addresses of the primary and copy recipients are entered in cells E3 and E4, respectively. The KPI 
+                            values are distributed into specific cells, such as E8, E7, E6, E9, F8, F7, F6, F9, G8, G7, G6, and G9, according to the VBA code. These 
+                            cells store data such as Payment Promised Percentage (PP), Payment Taken Percentage (PT), Conversion Rate (CR), among others, which is 
+                            then extracted to construct the email content. In this way, the interface in Excel provides a structured and efficient way to enter the 
+                            information required for automating the email sending process with KPIs.
+                        </p>
+                        <div class="home_Eco_banner">
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/email_main.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    To automatically send an email through Outlook, the body of the email is constructed in HTML format, including 
+                                    images, text and HTML tables that contain information about the KPIs, which will be linked to an SQL search and 
+                                    other relevant details. Once the email body has been constructed, it is assigned to the email object and sent to 
+                                    the recipients specified within cells B2 and B3 in excel.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/email_1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    In this code snippet, you are building a macro in Visual Basic for Applications (VBA) that automates the process 
+                                    of generating and sending emails through Microsoft Outlook using data from an Excel spreadsheet. The macro begins 
+                                    by declaring variables to store Outlook-related objects, such as the email recipients, the message content, and 
+                                    the Outlook application itself. These variables will be used later in the macro.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/email_2.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    The Outlook application is then instantiated using the CreateObject("Outlook.Application") function. This allows 
+                                    the code to interact with Outlook and perform actions such as creating and sending emails. Next, a new email object 
+                                    is created using objOutlook.CreateItem(olMailItem). This object will be used to build the email that will be sent 
+                                    later. The olMailItem constant specifies that a new email is being created, rather than another type of Outlook item.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/email_3.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    The email addresses of the recipients and those in copy are obtained from specific cells of the Excel spreadsheet and stored 
+                                    in corresponding variables. This ensures that the email will be sent to the correct addresses. Using the DateAdd function, the 
+                                    date of the previous day is calculated. This involves subtracting a day from the current date and the result is stored in a 
+                                    variable for later use in the email. The email subject is constructed by concatenating fixed text with the formatted current 
+                                    date and other specific details. The subject provides a brief description of the content of the email, allowing recipients to 
+                                    quickly understand its purpose and relevance.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/email_4.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Values are then assigned to variables related to Key Performance Indicators (KPIs) using data from specific cells in the Excel 
+                                    spreadsheet. These values are formatted as necessary and will be used to include relevant information in the body of the email. 
+                                    Finally, the body of the email is constructed in HTML format, including images, text, and HTML tables containing information 
+                                    about the KPIs and other relevant details. Once the email body has been constructed, it is assigned to the email object and 
+                                    sent to the specified recipients.
+                                </p>
+							</div>    
+        			    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ecobambu_Wed End -->
+
+        <div class="portfolio_end" id="portfolio_end">
+            <div class="container">
+                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                    <p>Resources and Repositories</p>
+                    <h2>Used tools</h2>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/VBA.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Visual Basic for Applications
+                        </h6>
+                    </div>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/Excel.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Microsoft Excel                      
+                        </h6>
+                    </div>  
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/outlook.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Microsoft Outlook                      
+                        </h6>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Start -->
+        <div class="links" id="links">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <a class="btn" href="https://github.com/MichelAbelloB/Auto_Email_KPI">Code </a>
+            </div>
+        </div>
+        <!-- Links End -->
+
+        <!-- Footer Start -->
+        <div class="footer wow fadeIn" data-wow-delay="0.3s">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="footer-info">
+                        <img src="img/banner end.png"/>
+                        <div class="footer-menu">
+                        </div>
+                        <div class="footer-social">
+                            <a href="https://www.behance.net/gallery/142669769/Personal-Branding"><i class="fab fa-behance"></i></a>
+                            <a href="https://www.linkedin.com/in/michel-abello/"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/MichelAbelloB"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container copyright">
+                    <p>&copy; <a href="#">Michel Abello</a>, All rights reserved | Designed by Michel.A</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        
+        <!-- Back to top button -->
+        <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/typed/typed.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <!-- Lenguage Javascript -->
+        <script src="js/language.js"></script>
+    </body>
+</html>
