@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>MichelAbello</title>
+        <meta content="Website-MichelAbello" name="MichelAbello">
+        
+        <meta content="MichelAbello - Business Administrator" name="keywords">
+        <meta content="Professional within his field of expertise. With extensive knowledge in design, programming and the administrative area." name="description">
+
+        <!-- Favicon -->
+        <link rel="icon" href="img/icon.png">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="51">
+
+        <!-- checkbox Language -->
+
+        <!--<div class="Language">
+            <span class="en">Español</span>
+            <input type="checkbox" class="check">
+            <span class="es">Ingles</span>
+        </div>-->
+
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">
+                    <div class="center-desk">
+                        <div class="logo">
+                           <a href="index.html"><img src="img/logo.png"/></a>
+                        </div>
+                    </div>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="index.html" class="nav-item nav-link active">Regresar al Inicio</a>
+                        <a href="#portfolio_start" class="nav-item nav-link active">Introducción</a>
+                        <a href="#portfolio_end" class="nav-item nav-link active">Recursos y Repositorios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Deko Start -->
+        <div class="Omega" id="home">
+            <div class="container-fluid">
+                <div class="hero-image-Ecobambu"></div>
+            </div>
+        </div>
+        <!-- Deko End -->
+        
+        <!-- Ecobambu_Wed Start -->
+        <div class="portfolio_start" id="portfolio_start">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <p>Analisis de datos</p>
+                <h2>Automatización de ingreso de datos Catedral de Manizales</h2>
+            </div>
+                <div class="container">
+                    <div class="container banner-text">
+                        <p>                           
+                            El primer paso en el desarrollo del sistema fue identificar los tipos de ocupación que se registrarían: osarios, casas en arriendo, 
+                            y parqueaderos. Con esta información, se planificó la estructura de las hojas de trabajo en Excel, asegurando que cada hoja tuviera 
+                            columnas específicas y relevantes para cada tipo de ocupación. Esta planificación incluyó la definición de campos como nombre del 
+                            arrendatario, fecha de inicio y fin del contrato, valor del arriendo, estado de pago, y observaciones. La organización clara de los 
+                            datos fue crucial para facilitar el desarrollo de macros eficientes y asegurar la integridad de la información almacenada.
+                        </p>
+                        <div class="home_Eco_banner">
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Catedral_1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Para simplificar el proceso de registro, se desarrollaron formularios de entrada mediante UserForms en 
+                                    VBA (Visual Basic for Applications). Cada formulario fue diseñado para capturar los datos específicos de 
+                                    cada tipo de ocupación. Los formularios incluyen campos obligatorios para evitar que se omita información 
+                                    esencial, y al completar los datos, el formulario se encarga de almacenarlos automáticamente en la hoja 
+                                    correspondiente. Esto no solo agiliza el registro de información, sino que también reduce la probabilidad 
+                                    de errores humanos.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Catedral_2.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Para facilitar el análisis y monitoreo de la ocupación, se crearon macros que generan reportes de manera 
+                                    automática. Estas macros consolidan datos de cada hoja y presentan un resumen de la ocupación actual, ingresos 
+                                    generados y contratos próximos a vencer. Los reportes ayudan a tener una visión general del estado de ocupación 
+                                    y ofrecen una herramienta útil para la toma de decisiones. Además, estas macros permiten filtrar y ordenar 
+                                    los datos según distintos criterios, como la disponibilidad de osarios, casas y parqueaderos.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Catedral_3.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>                                   
+                                    Para evitar duplicidades y optimizar la gestión de los recursos, se implementó una macro que verifica la 
+                                    disponibilidad antes de cada nuevo registro. Esta macro revisa las hojas de trabajo y alerta al usuario si 
+                                    el recurso ya está ocupado o si hay alguna inconsistencia en los datos. Esto garantiza que cada recurso (osario, 
+                                    casa o parqueadero) esté correctamente asignado y previene errores al realizar nuevos registros.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Catedral_4.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Se desarrollaron macros que monitorean las fechas de vencimiento de cada contrato y envían alertas cuando estas 
+                                    se aproximan. Estas alertas se generan automáticamente y están diseñadas para que el personal responsable reciba 
+                                    un aviso en pantalla cada vez que un contrato esté por expirar o haya un pago pendiente. De esta forma, se puede 
+                                    gestionar el seguimiento de renovaciones y evitar pérdidas de ingresos por falta de seguimiento.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Catedral_5.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Finalmente, se configuró la protección de datos en las hojas de trabajo y macros para asegurar que solo el 
+                                    personal autorizado pueda modificar los registros. Se aplicaron contraseñas en las hojas de trabajo para restringir 
+                                    el acceso y se desactivaron opciones de edición en los formularios de entrada. Esto garantiza que la información 
+                                    esté segura y que los datos sensibles no sean alterados sin autorización.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Catedral_6.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Para asegurar el correcto funcionamiento del sistema, se realizaron múltiples pruebas en cada una de las funciones 
+                                    desarrolladas. Estas pruebas incluyeron la validación de los formularios de entrada de datos, la verificación de los 
+                                    reportes automáticos y la efectividad de las alertas de vencimiento. Además, se probó la macro de control de 
+                                    disponibilidad para confirmar que detectara cualquier duplicidad de ocupación. Durante este proceso, se identificaron 
+                                    áreas de mejora en la velocidad de ejecución y la claridad de los mensajes de alerta, lo que permitió optimizar el 
+                                    código VBA y hacer ajustes en los formularios. Estas mejoras resultaron en un sistema más fluido y fácil de usar, 
+                                    cumpliendo con los objetivos de automatización y reduciendo significativamente el tiempo de administración manual. El 
+                                    sistema final ofrece un proceso confiable y optimizado para la gestión de recursos, cumpliendo con los requisitos de 
+                                    seguridad y precisión requeridos por la Catedral de Manizales.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/Catedral_7.png" alt="">
+                                </div>
+                            </div>    
+        			    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ecobambu_Wed End -->
+
+        <div class="portfolio_end" id="portfolio_end">
+            <div class="container">
+                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                    <p>Recursos y Repositorios</p>
+                    <h2>Herramientas Utilizadas</h2>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/VBA.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Visual Basic for Applications
+                        </h6>
+                    </div>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/Excel.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Microsoft Excel                      
+                        </h6>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Start -->
+        <div class="links" id="links">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <!-- <a class="btn" href="https://github.com/MichelAbello78/SQL_Data_Interface">Código </a>-->
+            </div>
+        </div>
+        <!-- Links End -->
+
+        <!-- Footer Start -->
+        <div class="footer wow fadeIn" data-wow-delay="0.3s">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="footer-info">
+                        <img src="img/banner end.png"/>
+                        <div class="footer-menu">
+                        </div>
+                        <div class="footer-social">
+                            <a href="https://www.behance.net/gallery/142669769/Personal-Branding"><i class="fab fa-behance"></i></a>
+                            <a href="https://www.linkedin.com/in/michel-abello/"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/MichelAbelloB"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container copyright">
+                    <p>&copy; <a href="#">Michel Abello</a>, Todos los derechos reservados | Diseñado por Michel.A</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        
+        <!-- Back to top button -->
+        <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/typed/typed.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <!-- Lenguage Javascript -->
+        <script src="js/language.js"></script>
+    </body>
+</html>
