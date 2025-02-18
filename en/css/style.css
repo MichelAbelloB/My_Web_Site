@@ -56,6 +56,12 @@ a:focus {
     -moz-transition: ease-out 0.3s;
 }
 
+.links {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 10px; /* Espacio entre botones */
+}
+
 .btn:hover {
     color: #d5d5d5;
     background: transparent;

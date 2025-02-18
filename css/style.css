@@ -41,6 +41,12 @@ a:focus {
     font-weight: 600;
 }
 
+.links {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 10px; /* Espacio entre botones */
+}
+
 .btn {
     padding: 12px 25px;
     font-size: 16px;

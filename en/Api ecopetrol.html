@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>MichelAbello</title>
+        <meta content="Website-MichelAbello" name="MichelAbello">
+        
+        <meta content="MichelAbello - Business Administrator" name="keywords">
+        <meta content="Professional within his field of expertise. With extensive knowledge in design, programming and the administrative area." name="description">
+
+        <!-- Favicon -->
+        <link rel="icon" href="img/icon.png">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="51">
+
+        <!-- checkbox Language -->
+
+        <!--<div class="Language">
+            <span class="en">Español</span>
+            <input type="checkbox" class="check">
+            <span class="es">Ingles</span>
+        </div>-->
+
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">
+                    <div class="center-desk">
+                        <div class="logo">
+                           <a href="index.html"><img src="img/logo.png"/></a>
+                        </div>
+                    </div>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="index.html" class="nav-item nav-link active">Back to top</a>
+                        <a href="#portfolio_start" class="nav-item nav-link active">Introduction</a>
+                        <a href="#portfolio_end" class="nav-item nav-link active">Resources and Repositories</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+        <!-- Deko Start -->
+        <div class="Omega" id="home">
+            <div class="container-fluid">
+                <div class="hero-image-Ecobambu"></div>
+            </div>
+        </div>
+        <!-- Deko End -->
+        
+        <!-- Ecobambu_Wed Start -->
+        <div class="portfolio_start" id="portfolio_start">
+        <div class="container">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <p>PROCESS AUTOMATION</p>
+                <h2>API for Real-Time Analysis of Ecopetrol Data</h2>
+            </div>
+                <div class="container">
+                    <div class="container banner-text">
+                        <p>                           
+                            The development of the system began with the identification of the relevant data sources for extraction,
+                            focusing on Ecopetrol's financial information published on the Colombian Stock Exchange. Based on
+                            this identification, an automated workflow was designed using an RPA, which is responsible for collecting
+                            and storing the data in a SQL database.
+                        </p>
+                        <div class="home_Eco_banner">
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/ecopetrol_1.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    To ensure real-time analysis, a processing system was implemented that allows the most relevant results to 
+                                    be viewed through a web API hosted on localhost. This integration facilitates continuous monitoring of key 
+                                    variables and optimizes decision-making based on updated information. The structure of the system ensures 
+                                    efficiency in data management and automation of the extraction and analysis process.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/ecopetrol_2.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Historical analysis involves collecting and evaluating past data to identify patterns, trends, and
+                                    anomalies. In this project, we will work with historical financial data from ECOPETROL, one of the
+                                    leading companies in the Colombian stock market. This data includes closing prices, high and low prices,
+                                    transaction volumes, and percentage and absolute changes. The analysis of this historical data will allow
+                                    us to establish a context for the behavior of ECOPETROL shares, which is essential for any predictive
+                                    analysis or investment decision making.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/ecopetrol_3.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>                                   
+                                    Data collection represents the starting point of the model. An RPA (Robotic Process Automation) was 
+                                    implemented to interact directly with the Colombian Stock Exchange (BVC) website. This automated 
+                                    approach was chosen due to the following reasons:
+                                </p>
+                                    <p> •	Eliminate repetitive and manual tasks: Downloading financial data manually is error-prone and 
+                                        consumes valuable time, especially when data needs to be updated frequently.
+                                </p>
+                                    <p> •	Process standardization: Using tools like pyautogui and webbrowser ensures that interaction 
+                                        with the website is consistent and replicable.                                   
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/ecopetrol_4.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    Visualizing the real-time data is done through a web API running on a local server (localhost). When the Flask 
+                                    application is started with the flask run command, the console displays messages indicating the status of the 
+                                    server. The message "Serving Flask app 'app'" means that Flask has identified the application being run, in this 
+                                    case, named 'app'. The notice "Debug mode: off" indicates that debug mode is disabled, which is suitable for a 
+                                    development environment, but not recommended for production. The warning "WARNING: This is a development server. 
+                                    Do not use it in a production deployment. Use a production WSGI server instead" underlines that Flask is running on 
+                                    its built-in development server, which is suitable for testing and development, but not robust enough to handle a 
+                                    production deployment. For production, it is recommended to use a WSGI server, such as Gunicorn or uWSGI, which 
+                                    are more secure and scalable.
+                                </p>
+							</div>
+                            <div class="row h_item">
+                                <div class="bar_img">
+                                    <img class="img-fluid" src="img/ecopetrol_5.png" alt="">
+                                </div>
+                            </div>
+                            <div class="ContDip">
+								<p>
+                                    The proposed implementation of the RPA system for the extraction of Ecopetrol data from the Colombian Stock Exchange 
+                                    could be an effective tool to optimize operational efficiency in the management of financial information. The use of 
+                                    RPA would potentially eliminate the need to perform repetitive and error-prone tasks, such as manual data collection, 
+                                    allowing these activities to be executed automatically and without human intervention. This approach would not only 
+                                    streamline the workflow, but would also significantly reduce the risk of errors and variability in the quality of the 
+                                    data collected, essential aspects in a financial environment where accuracy and consistency are essential. Reducing 
+                                    human intervention would free up resources that could be redirected to analysis and strategic decision-making activities.
+                                </p>
+							</div>  
+        			    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ecobambu_Wed End -->
+
+        <div class="portfolio_end" id="portfolio_end">
+            <div class="container">
+                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                    <p>Resources and Repositories</p>
+                    <h2>Used tools</h2>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/SQL.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            SQL Server Management
+                        </h6>
+                    </div>
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/Python.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Python                      
+                        </h6>
+                    </div>  
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/Python.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Python - Libreria Flask          
+                        </h6>
+                    </div>  
+                </div>
+                <div class="single-list flex-row d-flex">
+                    <div class="obj">
+                        <img src="img/Python.png" alt="">
+                    </div>
+                    <div class="text-p-end">
+                        <h6>
+                            Python - Libreria pyodbc             
+                        </h6>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Start -->
+        <div class="links" id="links">
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                <a class="btn" href="https://github.com/MichelAbelloB/BVC_Ecopetrol">Code </a>
+            </div>
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.2s">
+                <a class="btn" href="https://youtu.be/vPZA3psJMwU">Video </a>
+            </div>
+            <div class="section-header text-center wow zoomIn" data-wow-delay="0.2s">
+                <a class="btn" href="https://github.com/MichelAbelloB/BVC_Ecopetrol/blob/main/Manual%20de%20Usuario.pdf">User Manual </a>
+            </div>
+        </div>
+        <!-- Links End -->
+
+        <!-- Footer Start -->
+        <div class="footer wow fadeIn" data-wow-delay="0.3s">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="footer-info">
+                        <img src="img/banner end.png"/>
+                        <div class="footer-menu">
+                        </div>
+                        <div class="footer-social">
+                            <a href="https://www.behance.net/gallery/142669769/Personal-Branding"><i class="fab fa-behance"></i></a>
+                            <a href="https://www.linkedin.com/in/michel-abello/"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/MichelAbelloB"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container copyright">
+                    <p>&copy; <a href="#">Michel Abello</a>, All rights reserved | Designed by Michel.A</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        
+        <!-- Back to top button -->
+        <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
+        
+        
+        <!-- Pre Loader -->
+        <div id="loader" class="show">
+            <div class="loader"></div>
+        </div>
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/typed/typed.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <!-- Lenguage Javascript -->
+        <script src="js/language.js"></script>
+    </body>
+</html>
