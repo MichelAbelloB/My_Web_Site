@@ -17,22 +17,619 @@
         <!-- CSS Libraries -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        
+        <!-- Estilos personalizados mejorados -->
+        <style>
+            /* ========== VISUALIZADOR DE PDF ========== */
+            .pdf-viewer-modal {
+                display: none;
+                position: fixed;
+                z-index: 9999;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.95);
+                animation: fadeIn 0.3s;
+            }
+            
+            .pdf-viewer-modal.active {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            .pdf-viewer-container {
+                width: 95%;
+                height: 95%;
+                max-width: 1400px;
+                background: #192231;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            }
+            
+            .pdf-viewer-header {
+                background: #1a1a1a;
+                padding: 15px 20px;
+                border-radius: 10px 10px 0 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 2px solid #985E6D;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .pdf-viewer-header h3 {
+                color: #ffffff;
+                margin: 0;
+                font-size: 18px;
+                font-weight: 600;
+                flex: 1 1 200px;
+            }
+            
+            .pdf-controls {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .pdf-btn {
+                background: #985E6D;
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.3s;
+                white-space: nowrap;
+            }
+            
+            .pdf-btn:hover {
+                background: #985E6D;
+                transform: translateY(-2px);
+            }
+            
+            .pdf-btn:active {
+                transform: translateY(0);
+            }
+            
+            .pdf-close-btn {
+                background: #dc3545;
+            }
+            
+            .pdf-close-btn:hover {
+                background: #c82333;
+            }
+            
+            .pdf-page-info, .pdf-zoom-info {
+                color: #ffffff;
+                font-size: 13px;
+                background: #333;
+                border-radius: 5px;
+                padding: 8px 12px;
+                white-space: nowrap;
+            }
+            
+            .pdf-viewer-content {
+                flex: 1;
+                overflow: auto;
+                background: #404040;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                border-radius: 0 0 10px 10px;
+                padding: 20px;
+            }
+            
+            #pdfCanvas {
+                display: block;
+                max-width: 100%;
+                height: auto;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+            
+            .pdf-loading {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                color: #ffffff;
+            }
+            
+            .pdf-loading p {
+                margin-top: 20px;
+                font-size: 18px;
+            }
+            
+            .pdf-loading i {
+                color: #985E6D;
+            }
+            
+            /* ========== SECCIÓN DE ARTÍCULOS MEJORADA ========== */
+            .blog-item {
+                background: #ffffff;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .blog-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(239, 35, 60, 0.2);
+            }
+            
+            .blog-img {
+                overflow: hidden;
+                height: 250px;
+                position: relative;
+            }
+            
+            .blog-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s;
+            }
+            
+            .blog-item:hover .blog-img img {
+                transform: scale(1.1);
+            }
+            
+            .blog-text {
+                padding: 25px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .blog-text h2 {
+                font-size: 20px;
+                line-height: 1.4;
+                margin-bottom: 15px;
+                color: #192231;
+                font-weight: 700;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+            
+            .blog-meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-bottom: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .blog-meta p {
+                margin: 0;
+                font-size: 13px;
+                color: #666;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+            
+            .blog-meta i {
+                color: #985E6D;
+            }
+            
+            .blog-text > p {
+                font-size: 15px;
+                line-height: 1.7;
+                color: #555;
+                margin-bottom: 20px;
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+            }
+            
+            .blog-text .btn {
+                margin-top: auto;
+                width: 100%;
+                text-align: center;
+                padding: 12px 20px;
+                font-weight: 600;
+                border-radius: 8px;
+            }
+            
+            .blog-text .btn + .btn {
+                margin-top: 10px;
+            }
+            
+            /* ========== SECCIÓN DE CONTACTO MEJORADA ========== */
+            .contact {
+                padding: 60px 0;
+                background: linear-gradient(135deg, #D7CEC7 0%, #D5D5D5 100%);
+            }
+            
+            .contact-info-card {
+                background: #ffffff;
+                border-radius: 20px;
+                padding: 50px 40px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+                margin: 30px auto;
+                max-width: 1200px;
+            }
+            
+            .contact-image-wrapper {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            
+            .contact-main-img {
+                max-width: 100%;
+                height: auto;
+                width: 280px;
+                border-radius: 15px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            }
+            
+            .contact-content h3 {
+                color: #985E6D;
+                font-size: 36px;
+                font-weight: 700;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .contact-content > p {
+                text-align: center;
+                font-size: 16px;
+                line-height: 1.8;
+                color: #555;
+                margin-bottom: 50px;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .contact-methods {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            
+            .contact-method-item {
+                background: linear-gradient(135deg, #ffffff 0%, #D7CEC7 100%);
+                padding: 40px 25px;
+                border-radius: 15px;
+                text-align: center;
+                transition: all 0.3s;
+                box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+                border: 2px solid transparent;
+            }
+            
+            .contact-method-item:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 35px rgba(239, 35, 60, 0.25);
+                border-color: #985E6D;
+            }
+            
+            .contact-method-item i {
+                color: #985E6D;
+                margin-bottom: 20px;
+                transition: all 0.3s;
+            }
+            
+            .contact-method-item:hover i {
+                transform: scale(1.1);
+            }
+            
+            .contact-method-item h4 {
+                color: #192231;
+                font-size: 22px;
+                font-weight: 600;
+                margin-bottom: 12px;
+            }
+            
+            .contact-method-item p {
+                color: #666;
+                font-size: 15px;
+                margin-bottom: 25px;
+                line-height: 1.6;
+            }
+            
+            .btn-contact {
+                background: #985E6D;
+                color: white !important;
+                padding: 14px 30px;
+                border-radius: 30px;
+                text-decoration: none;
+                display: inline-block;
+                transition: all 0.3s;
+                font-weight: 600;
+                border: none;
+                font-size: 15px;
+            }
+            
+            .btn-contact:hover {
+                background: #985E6D;
+                color: white !important;
+                transform: scale(1.05);
+                box-shadow: 0 8px 20px rgba(239, 35, 60, 0.4);
+            }
+            
+            .availability-banner {
+                background: linear-gradient(135deg, #985E6D 0%, #985E6D 100%);
+                color: white;
+                padding: 25px 35px;
+                border-radius: 15px;
+                text-align: center;
+                font-size: 17px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 40px;
+                box-shadow: 0 5px 20px rgba(239, 35, 60, 0.3);
+            }
+            
+            .availability-banner i {
+                font-size: 28px;
+            }
+            
+            /* ========== RESPONSIVE DESIGN ========== */
+            
+            /* Tablets */
+            @media (max-width: 992px) {
+                .blog-text h2 {
+                    font-size: 18px;
+                }
+                
+                .contact-content h3 {
+                    font-size: 30px;
+                }
+                
+                .contact-methods {
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 25px;
+                }
+            }
+            
+            /* Móviles */
+            @media (max-width: 768px) {
+                /* PDF Viewer Mobile */
+                .pdf-viewer-container {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 0;
+                }
+                
+                .pdf-viewer-header {
+                    padding: 12px 15px;
+                }
+                
+                .pdf-viewer-header h3 {
+                    font-size: 14px;
+                    width: 100%;
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+                
+                .pdf-controls {
+                    width: 100%;
+                    justify-content: center;
+                }
+                
+                .pdf-btn {
+                    padding: 6px 10px;
+                    font-size: 12px;
+                }
+                
+                .pdf-page-info, .pdf-zoom-info {
+                    font-size: 11px;
+                    padding: 6px 8px;
+                }
+                
+                .pdf-viewer-content {
+                    padding: 10px;
+                }
+                
+                /* Artículos Mobile */
+                .blog-img {
+                    height: 200px;
+                }
+                
+                .blog-text {
+                    padding: 20px;
+                }
+                
+                .blog-text h2 {
+                    font-size: 17px;
+                    -webkit-line-clamp: 2;
+                }
+                
+                .blog-meta {
+                    flex-direction: column;
+                    gap: 8px;
+                }
+                
+                .blog-text > p {
+                    font-size: 14px;
+                    -webkit-line-clamp: 4;
+                }
+                
+                .blog-text .btn {
+                    padding: 10px 15px;
+                    font-size: 14px;
+                }
+                
+                /* Contacto Mobile */
+                .contact-info-card {
+                    padding: 30px 20px;
+                    border-radius: 15px;
+                }
+                
+                .contact-main-img {
+                    width: 200px;
+                }
+                
+                .contact-content h3 {
+                    font-size: 24px;
+                    line-height: 1.3;
+                }
+                
+                .contact-content > p {
+                    font-size: 15px;
+                    margin-bottom: 35px;
+                }
+                
+                .contact-methods {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+                
+                .contact-method-item {
+                    padding: 30px 20px;
+                }
+                
+                .contact-method-item h4 {
+                    font-size: 20px;
+                }
+                
+                .contact-method-item p {
+                    font-size: 14px;
+                }
+                
+                .btn-contact {
+                    padding: 12px 25px;
+                    font-size: 14px;
+                }
+                
+                .availability-banner {
+                    flex-direction: column;
+                    gap: 12px;
+                    font-size: 15px;
+                    padding: 20px 20px;
+                }
+                
+                .availability-banner i {
+                    font-size: 24px;
+                }
+            }
+            
+            /* Móviles pequeños */
+            @media (max-width: 480px) {
+                .blog-text h2 {
+                    font-size: 16px;
+                }
+                
+                .blog-text > p {
+                    -webkit-line-clamp: 3;
+                }
+                
+                .contact-content h3 {
+                    font-size: 22px;
+                }
+                
+                .contact-content > p {
+                    font-size: 14px;
+                }
+                
+                .pdf-controls {
+                    gap: 5px;
+                }
+                
+                .pdf-btn {
+                    padding: 5px 8px;
+                    font-size: 11px;
+                }
+            }
+            
+            /* ========== TOGGLE DE IDIOMA ========== */
+            .language-toggle {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                background: linear-gradient(135deg, #985E6D 0%, #985E6D 100%);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 14px;
+                box-shadow: 0 4px 15px rgba(239, 35, 60, 0.3);
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .language-toggle:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(239, 35, 60, 0.4);
+                background: linear-gradient(135deg, #985E6D 0%, #b00d27 100%);
+            }
+            
+            .language-toggle:active {
+                transform: translateY(0);
+            }
+            
+            .language-toggle i {
+                font-size: 16px;
+            }
+            
+            .lang-text {
+                font-weight: 700;
+                letter-spacing: 0.5px;
+            }
+            
+            @media (max-width: 768px) {
+                .language-toggle {
+                    top: 10px;
+                    right: 10px;
+                    padding: 8px 16px;
+                    font-size: 12px;
+                }
+                
+                .language-toggle i {
+                    font-size: 14px;
+                }
+            }
+        </style>
     </head>
 
     <body data-spy="scroll" data-target=".navbar" data-offset="51">
 
-        <!-- checkbox Language -->
-        <div class="Language">
-            <span class="en">Español</span>
-            <input type="checkbox" class="check">
-            <span class="es">Ingles</span>
-        </div>
+        <!-- Language Toggle Modern -->
+        <button class="language-toggle" aria-label="Cambiar idioma">
+            <i class="fas fa-globe"></i> <span class="lang-text">ES</span>
+        </button>
+
         <!-- Nav Bar Start -->
         <div class="navbar navbar-expand-lg bg-light navbar-light">
             <div class="container-fluid">
@@ -49,14 +646,13 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav ml-auto">
-                        <a href="#home" class="nav-item nav-link active">Inicio</a>
-                        <a href="#about" class="nav-item nav-link">Sobre Mi</a>
-                        <a href="#service" class="nav-item nav-link">Habilidades</a>
-                        <a href="#experience" class="nav-item nav-link">Experiencia</a>
-                        <a href="#portfolio" class="nav-item nav-link">Portfolio</a>
-                        <a href="#contact" class="nav-item nav-link">Contáctame</a>
-                        <a href="#Articles" class="nav-item nav-link">Artículos</a>
-                        
+                        <a href="#home" class="nav-item nav-link active" data-i18n="nav.home">Inicio</a>
+                        <a href="#about" class="nav-item nav-link" data-i18n="nav.about">Sobre Mi</a>
+                        <a href="#service" class="nav-item nav-link" data-i18n="nav.skills">Habilidades</a>
+                        <a href="#experience" class="nav-item nav-link" data-i18n="nav.experience">Experiencia</a>
+                        <a href="#portfolio" class="nav-item nav-link" data-i18n="nav.portfolio">Portfolio</a>
+                        <a href="#contact" class="nav-item nav-link" data-i18n="nav.contact">Contáctame</a>
+                        <a href="#Articles" class="nav-item nav-link" data-i18n="nav.articles">Artículos</a>
                     </div>
                 </div>
             </div>
@@ -70,14 +666,14 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="hero-content">
                             <div class="hero-text">
-                                <p>Yo soy</p>
-                                <h1>Michel Abello</h1>
+                                <p data-i18n="hero.iam">Yo soy</p>
+                                <h1 data-i18n="hero.name">Michel Abello</h1>
                                 <h2></h2>
                                 <div class="typed-text">Cientifico de Datos, Administrador de Empresas, Especialista en Automatizacion, Analista de Datos, Analista de inteligencia</div>
                             </div>
                             <div class="hero-btn">
-                                <a class="btn" href="#about">Sobre Mi</a>
-                                <a class="btn" href="#contact">Contáctame</a>
+                                <a class="btn" href="#about" data-i18n="hero.aboutBtn">Sobre Mi</a>
+                                <a class="btn" href="#contact" data-i18n="hero.contactBtn">Contáctame</a>
                             </div>
                         </div>
                     </div>
@@ -101,11 +697,12 @@
                     <div class="col-lg-6">
                         <div class="about-content">
                             <div class="section-header text-left">
-                                <p>SOBRE MÍ</p>
-                                <h2>¿QUIÉN SOY?</h2>
+                                <p data-i18n="about.title">SOBRE MÍ</p>
+                                <h2 data-i18n="about.subtitle">¿QUIÉN SOY?</h2>
                             </div>
                             <div class="about-text">
-                                <p>                                  
+                                <p data-es="¡Hola! Soy Michel Abello, administrador de empresas; Como analista de datos con sólidos conocimientos de Python, SQL y Excel avanzado con gestión de macros, tengo una capacidad excepcional para extraer, limpiar y analizar datos complejos de forma eficaz. Mi objetivo profesional es aplicar estas habilidades para transformar datos en conocimientos significativos que impulsen la toma de decisiones estratégicas. Busco colaborar en un entorno dinámico donde pueda utilizar mi experiencia en análisis de datos para resolver problemas de negocio y contribuir al crecimiento y éxito de la organización."
+                                   data-en="Hello! I am Michel Abello, a business administrator; As a data analyst with strong knowledge of Python, SQL and advanced Excel with macro management, I have an exceptional ability to extract, clean and analyze complex data effectively. My professional goal is to apply these skills to transform data into meaningful insights that drive strategic decision making. I seek to collaborate in a dynamic environment where I can use my data analysis experience to solve business problems and contribute to the growth and success of the organization.">
                                     ¡Hola! Soy Michel Abello, administrador de empresas; Como analista de datos con sólidos conocimientos de Python, SQL y Excel avanzado con gestión de macros, tengo una capacidad excepcional para extraer, limpiar y analizar datos complejos de forma eficaz. Mi objetivo profesional es aplicar estas habilidades para transformar datos en conocimientos significativos que impulsen la toma de decisiones estratégicas. Busco colaborar en un entorno dinámico donde pueda utilizar mi experiencia en análisis de datos para resolver problemas de negocio y contribuir al crecimiento y éxito de la organización.
                                 </p>
                             </div>
@@ -159,8 +756,8 @@
         <div class="service" id="service">
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>Lo que hago</p>
-                    <h2>Habilidades en Detalle</h2>
+                    <p data-es="Lo que hago" data-en="What I Do">Lo que hago</p>
+                    <h2 data-es="Habilidades en Detalle" data-en="Skills in Detail">Habilidades en Detalle</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.0s">
@@ -169,8 +766,9 @@
                                 <i class="fa fa-laptop-code"></i>
                             </div>
                             <div class="service-text">
-                                <h3>Suit Office</h3>
-                                <p>
+                                <h3 data-es="Suit Office" data-en="Office Suite">Suit Office</h3>
+                                <p data-es="Manejo avanzado de las herramientas PowerPoint, Excel, Word y Outlook. Dentro de estas herramientas tengo conocimiento de macros, tablas dinámicas, creación de plantillas y optimización de documentos. Además de un manejo intermedio de las herramientas Access, Visio y Project."
+                                   data-en="Advanced management of PowerPoint, Excel, Word and Outlook tools. Within these tools I have knowledge of macros, pivot tables, template creation and document optimization. In addition to intermediate management of Access, Visio and Project tools.">
                                     Manejo avanzado de las herramientas PowerPoint, Excel, Word y Outlook. Dentro 
                                     de estas herramientas tengo conocimiento de macros, tablas dinámicas, creación 
                                     de plantillas y optimización de documentos. Además de un manejo intermedio de 
@@ -185,13 +783,8 @@
                                 <i class="fa fa-laptop-code"></i>
                             </div>
                             <div class="service-text">
-                                <h3>Suit Adobe</h3>
-                                <p>
-                                    Manejo intermedio de las herramientas de Adobe Photoshop, Adobe XD y Illustrator. 
-                                    Dentro de estas herramientas tengo conocimiento en la proporción aurea, el manejo 
-                                    de retículas y generación de prototipos UI. Además de un manejo básico de las 
-                                    herramientas InDesign, Premiere Pro y Audition.
-                                </p>
+                                <h3 data-es="Suit Adobe" data-en="Adobe Suite">Suit Adobe</h3>
+                                <p><p data-es="Manejo intermedio de las herramientas de Adobe Photoshop, Adobe XD y Illustrator. Dentro de estas herramientas tengo conocimiento en la proporción aurea, el manejo de retículas y generación de prototipos UI. Además de un manejo básico de las herramientas InDesign, Premiere Pro y Audition." data-en="Intermediate management of Adobe Photoshop, Adobe XD and Illustrator tools. Within these tools I have knowledge in the golden ratio, the management of grids and UI prototype generation. In addition to basic management of InDesign, Premiere Pro and Audition tools.">Manejo intermedio de las herramientas de Adobe Photoshop, Adobe XD y Illustrator. Dentro de estas herramientas tengo conocimiento en la proporción aurea, el manejo de retículas y generación de prototipos UI. Además de un manejo básico de las herramientas InDesign, Premiere Pro y Audition.</p></p>
                             </div>
                         </div>
                     </div>
@@ -202,11 +795,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>PostgreSQL / MySQL</h3>
-                                <p>
-                                    Manejo intermedio de MySQL y PostgreSQL. Dentro de estas dos sintaxis de SQL tengo 
-                                    conocimiento en la generación de tablas, administración de bases, manejo de 
-                                    constraints, creación de tablas temporales y WITH. 
-                                </p>
+                                <p data-es="Manejo intermedio de MySQL y PostgreSQL. Dentro de estas dos sintaxis de SQL tengo conocimiento en la generación de tablas, administración de bases, manejo de constraints, creación de tablas temporales y WITH." data-en="Intermediate management of MySQL and PostgreSQL. Within these two SQL syntaxes I have knowledge in table generation, database administration, constraints management, creation of temporary tables and WITH.">Manejo intermedio de MySQL y PostgreSQL. Dentro de estas dos sintaxis de SQL tengo conocimiento en la generación de tablas, administración de bases, manejo de constraints, creación de tablas temporales y WITH.</p>
                             </div>
                         </div>
                     </div>
@@ -217,11 +806,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>Python</h3>
-                                <p>
-                                    Manejo intermedio del lenguaje Python. Dentro de la sintaxis y las librerías de 
-                                    este lenguaje manejo las librerías de Numpy, Matplotlib, Pandas, tkinter para la 
-                                    creación de interfaces gráficas, pymysql y Turtle. 
-                                </p>
+                                <p data-es="Manejo intermedio del lenguaje Python. Dentro de la sintaxis y las librerías de este lenguaje manejo las librerías de Numpy, Matplotlib, Pandas, tkinter para la creación de interfaces gráficas, pymysql y Turtle." data-en="Intermediate management of the Python language. Within the syntax and libraries of this language I manage the libraries of Numpy, Matplotlib, Pandas, tkinter for the creation of graphical interfaces, pymysql and Turtle.">Manejo intermedio del lenguaje Python. Dentro de la sintaxis y las librerías de este lenguaje manejo las librerías de Numpy, Matplotlib, Pandas, tkinter para la creación de interfaces gráficas, pymysql y Turtle.</p>
                             </div>
                         </div>
                     </div>
@@ -232,12 +817,7 @@
                             </div>
                             <div class="service-text">
                                 <h3>HTML / CSS</h3>
-                                <p>
-                                    Manejo intermedio del lenguaje HTML5 y CSS3. Conocimiento en la estructuración, 
-                                    ideación y enlace de datos. Además de la publicación y mantenimiento de la web 
-                                    mediante cPanel y la utilización de Java y Php como complementos funcionales 
-                                    de la web.
-                                </p>
+                                <p data-es="Manejo intermedio del lenguaje HTML5 y CSS3. Conocimiento en la estructuración, ideación y enlace de datos. Además de la publicación y mantenimiento de la web mediante cPanel y la utilización de Java y Php como complementos funcionales de la web." data-en="Intermediate management of HTML5 and CSS3 language. Knowledge in structuring, ideation and data linking. In addition to web publishing and maintenance through cPanel and the use of Java and Php as functional complements of the web.">Manejo intermedio del lenguaje HTML5 y CSS3. Conocimiento en la estructuración, ideación y enlace de datos. Además de la publicación y mantenimiento de la web mediante cPanel y la utilización de Java y Php como complementos funcionales de la web.</p>
                             </div>
                         </div>
                     </div>
@@ -247,8 +827,9 @@
                                 <i class="fa fa-laptop-code"></i>
                             </div>
                             <div class="service-text">
-                                <h3>Análisis con Power BI / Tableau</h3>
-                                <p>
+                                <h3 data-es="Análisis con Power BI / Tableau" data-en="Analysis with Power BI / Tableau">Análisis con Power BI / Tableau</h3>
+                                <p data-es="Manejo intermedio de la herramienta Power BI y manejo básico de Tableau. Dentro de las dos herramientas tengo experiencia en la generación de tableros, importación de datos, generación de informes, manejo de fórmulas y filtrado de datos."
+                                   data-en="Intermediate management of Power BI tool and basic management of Tableau. Within both tools I have experience in dashboard generation, data import, report generation, formula management and data filtering.">
                                     Manejo intermedio de la herramienta Power BI y manejo básico de Tableau. Dentro 
                                     de las dos herramientas tengo experiencia en la generación de tableros, 
                                     importación de datos, generación de informes, manejo de fórmulas y filtrado 
@@ -263,8 +844,9 @@
                                 <i class="fa fa-laptop-code"></i>
                             </div>
                             <div class="service-text">
-                                <h3>Visual Basic for Applications (VBA)</h3>
-                                <p>
+                                <h3 data-es="Visual Basic for Applications (VBA)" data-en="Visual Basic for Applications (VBA)">Visual Basic for Applications (VBA)</h3>
+                                <p data-es="Manejo avanzado en el uso del lenguaje VBA para creación de soluciones personalizadas y automatizando de tareas. Además de la creación de macros ligadas a extensiones externas e internas de Windows."
+                                   data-en="Advanced management in the use of VBA language for creating custom solutions and automating tasks. In addition to creating macros linked to external and internal Windows extensions.">
                                     Manejo avanzado en el uso del lenguaje VBA para creación de soluciones 
                                     personalizadas y automatizando de tareas. Además de la creación de macros 
                                     ligadas a extensiones externas e internas de Windows.
@@ -278,8 +860,9 @@
                                 <i class="fa fa-laptop-code"></i>
                             </div>
                             <div class="service-text">
-                                <h3>Amazon Web Services (AWS)</h3>
-                                <p>
+                                <h3 data-es="Amazon Web Services (AWS)" data-en="Amazon Web Services (AWS)">Amazon Web Services (AWS)</h3>
+                                <p data-es="Manejo intermedio de AWS mediante el manejo de su nube, su infraestructura y sus procesos de aprendizaje automático. Además de un manejo básico de QuickSight y sus herramientas complementarias."
+                                   data-en="Intermediate management of AWS through handling its cloud, infrastructure and machine learning processes. In addition to basic management of QuickSight and its complementary tools.">
                                     Manejo intermedio de AWS mediante el manejo de su nube, su infraestructura 
                                     y sus procesos de aprendizaje automático. Además de un manejo básico de 
                                     QuickSight y sus herramientas complementarias.
@@ -297,26 +880,32 @@
          <div class="experience" id="experience">
             <div class="container">
                 <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>Resumen</p>
-                    <h2>Experiencia Laboral</h2>
+                    <p data-es="Resumen" data-en="Summary">Resumen</p>
+                    <h2 data-es="Experiencia Laboral" data-en="Work Experience">Experiencia Laboral</h2>
                 </header>                
                 <div class="timeline">
                     <div class="timeline-item right wow slideInRigh" data-wow-delay="0.1s">
                         <div class="timeline-text">
-                            <div class="timeline-date">Agosto 2024 - Actualmente</div>
-                            <h2>Analista Mejoramiento de Procesos FID</h2>
-                            <h4>Scotiabank Colpatria. Bogotá, Colombia</h4>
-                            <p>
+                            <div class="timeline-date" data-es="Agosto 2024 - Actualmente" data-en="August 2024 - Present">Agosto 2024 - Actualmente</div>
+                            <h2 data-es="Analista Mejoramiento de Procesos FID" data-en="FID Process Improvement Analyst">Analista Mejoramiento de Procesos FID</h2>
+                            <h4 data-es="Scotiabank Colpatria. Bogotá, Colombia" data-en="Scotiabank Colpatria. Bogotá, Colombia">Scotiabank Colpatria. Bogotá, Colombia</h4>
+                            <p data-es="En mi función actual como analista de mejora de procesos en FID, diseño y desarrollo procesos de automatización utilizando VBA, Python, R Studio y Power BI, con el objetivo de mejorar la eficiencia operativa y generar conocimientos estratégicos a partir de datos estructurados."
+                               data-en="In my current role as a process improvement analyst at FID, I design and develop automation processes using VBA, Python, R Studio and Power BI, with the aim of improving operational efficiency and generating strategic insights from structured data.">
                                 En mi función actual como analista de mejora de procesos en FID, diseño y desarrollo procesos de automatización utilizando VBA, Python, R Studio y Power BI, con el objetivo de mejorar la eficiencia operativa y generar conocimientos estratégicos a partir de datos estructurados.
                             </p>
                             <br>
-                                💻Responsabilidades:
+                                <span data-es="💻Responsabilidades:" data-en="💻Responsibilities:">💻Responsabilidades:</span>
                             <br>
-                            <p>• Utilizo VBA y Python para crear soluciones de automatización que optimicen flujos de trabajo repetitivos, reduciendo el tiempo de ejecución y minimizando errores en los procesos operativos.</p>
-                            <p>• Aplico R Studio para análisis estadístico avanzado y modelado de datos, identificando oportunidades de mejora continua en los procesos.</p>
-                            <p>• Implemento macros personalizadas en Excel, integradas con bases de datos SQL, para automatizar la generación de informes y proporcionar análisis detallados y precisos.</p>
-                            <p>• Colaboro con equipos de diferentes áreas para garantizar la integridad de los datos y la implementación exitosa de soluciones automatizadas.</p>
-                            <p>• Gestiono y optimiza bases de datos en Access, asegurando la integridad, accesibilidad y rapidez en la extracción de datos para análisis e informes, y mejorando el rendimiento de consultas críticas para las operaciones.</p>
+                            <p data-es="• Utilizo VBA y Python para crear soluciones de automatización que optimicen flujos de trabajo repetitivos, reduciendo el tiempo de ejecución y minimizando errores en los procesos operativos."
+                               data-en="• I use VBA and Python to create automation solutions that optimize repetitive workflows, reducing execution time and minimizing errors in operational processes.">• Utilizo VBA y Python para crear soluciones de automatización que optimicen flujos de trabajo repetitivos, reduciendo el tiempo de ejecución y minimizando errores en los procesos operativos.</p>
+                            <p data-es="• Aplico R Studio para análisis estadístico avanzado y modelado de datos, identificando oportunidades de mejora continua en los procesos."
+                               data-en="• I apply R Studio for advanced statistical analysis and data modeling, identifying opportunities for continuous process improvement.">• Aplico R Studio para análisis estadístico avanzado y modelado de datos, identificando oportunidades de mejora continua en los procesos.</p>
+                            <p data-es="• Implemento macros personalizadas en Excel, integradas con bases de datos SQL, para automatizar la generación de informes y proporcionar análisis detallados y precisos."
+                               data-en="• I implement custom macros in Excel, integrated with SQL databases, to automate report generation and provide detailed and accurate analysis.">• Implemento macros personalizadas en Excel, integradas con bases de datos SQL, para automatizar la generación de informes y proporcionar análisis detallados y precisos.</p>
+                            <p data-es="• Colaboro con equipos de diferentes áreas para garantizar la integridad de los datos y la implementación exitosa de soluciones automatizadas."
+                               data-en="• I collaborate with teams from different areas to ensure data integrity and successful implementation of automated solutions.">• Colaboro con equipos de diferentes áreas para garantizar la integridad de los datos y la implementación exitosa de soluciones automatizadas.</p>
+                            <p data-es="• Gestiono y optimiza bases de datos en Access, asegurando la integridad, accesibilidad y rapidez en la extracción de datos para análisis e informes, y mejorando el rendimiento de consultas críticas para las operaciones."
+                               data-en="• I manage and optimize databases in Access, ensuring integrity, accessibility and speed in data extraction for analysis and reports, and improving the performance of critical queries for operations.">• Gestiono y optimiza bases de datos en Access, asegurando la integridad, accesibilidad y rapidez en la extracción de datos para análisis e informes, y mejorando el rendimiento de consultas críticas para las operaciones.</p>
                         </div>
                     </div>          
                 </div>
@@ -327,24 +916,31 @@
                 <div class="timeline">
                     <div class="timeline-item left wow slideInRigh" data-wow-delay="0.1s">
                         <div class="timeline-text">
-                            <div class="timeline-date">Enero 2023 - Agosto 2024</div>
-                            <h2>Reporting Analyst</h2>
-                            <h4>Teleperformance. Bogotá, Colombia</h4>
-                            <p>
+                            <div class="timeline-date" data-es="Enero 2023 - Agosto 2024" data-en="January 2023 - August 2024">Enero 2023 - Agosto 2024</div>
+                            <h2 data-es="Reporting Analyst" data-en="Reporting Analyst">Reporting Analyst</h2>
+                            <h4 data-es="Teleperformance. Bogotá, Colombia" data-en="Teleperformance. Bogotá, Colombia">Teleperformance. Bogotá, Colombia</h4>
+                            <p data-es="Dentro de mis funciones principales como analista trabajo con SQL, Python y Excel avanzado, para el análisis de conjuntos de datos estructurados de diversas campañas para el desarrollo de análisis integrales de KPI."
+                               data-en="Within my main functions as an analyst I work with SQL, Python and advanced Excel, for the analysis of structured data sets from various campaigns for the development of comprehensive KPI analysis.">
                             Dentro de mis funciones principales como analista trabajo con SQL, Python y Excel avanzado, para el análisis de conjuntos de datos estructurados de diversas campañas para el desarrollo de análisis integrales de KPI.
                             </p>
                             <br>
-                            💻Responsabilidades:
+                            <span data-es="💻Responsabilidades:" data-en="💻Responsibilities:">💻Responsabilidades:</span>
                             <br>
-                            <p>• Utilicé SQL para buscar y manipular grandes conjuntos de datos de múltiples fuentes, identificando tendencias y patrones clave que informaron la estrategia de campaña.</p>
-                            <p>• Desarrollé informes ejecutivos y presentaciones de alto impacto que comunicaron claramente los resultados del análisis de datos.</p>
-                            <p>• Creé paneles interactivos y paneles en Excel utilizando macros y SQL para proporcionar información visualmente atractiva y fácil de entender sobre el rendimiento de la campaña.</p>
-                            <p>• Comunicarse con diferencias de área que impactan la integridad de los datos.</p>
+                            <p data-es="• Utilicé SQL para buscar y manipular grandes conjuntos de datos de múltiples fuentes, identificando tendencias y patrones clave que informaron la estrategia de campaña."
+                               data-en="• I used SQL to search and manipulate large data sets from multiple sources, identifying key trends and patterns that informed campaign strategy.">• Utilicé SQL para buscar y manipular grandes conjuntos de datos de múltiples fuentes, identificando tendencias y patrones clave que informaron la estrategia de campaña.</p>
+                            <p data-es="• Desarrollé informes ejecutivos y presentaciones de alto impacto que comunicaron claramente los resultados del análisis de datos."
+                               data-en="• I developed executive reports and high-impact presentations that clearly communicated the results of data analysis.">• Desarrollé informes ejecutivos y presentaciones de alto impacto que comunicaron claramente los resultados del análisis de datos.</p>
+                            <p data-es="• Creé paneles interactivos y paneles en Excel utilizando macros y SQL para proporcionar información visualmente atractiva y fácil de entender sobre el rendimiento de la campaña."
+                               data-en="• I created interactive dashboards and panels in Excel using macros and SQL to provide visually appealing and easy-to-understand information on campaign performance.">• Creé paneles interactivos y paneles en Excel utilizando macros y SQL para proporcionar información visualmente atractiva y fácil de entender sobre el rendimiento de la campaña.</p>
+                            <p data-es="• Comunicarse con diferencias de área que impactan la integridad de los datos."
+                               data-en="• Communicate with area differences that impact data integrity.">• Comunicarse con diferencias de área que impactan la integridad de los datos.</p>
                             <br>
-                            🏆Logros:
+                            <span data-es="🏆Logros:" data-en="🏆Achievements:">🏆Logros:</span>
                             <br>
-                            <p>• Implementé macros y scripts personalizados que mejoraron la eficiencia operativa y me permitieron realizar un seguimiento de los importadores ejecutados durante el día.</p>
-                            <p>• Aplicación de técnicas avanzadas de análisis de datos con Python para descubrir insights significativos, como segmentación de clientes, comportamientos de compra y efectividad de campañas.</p>
+                            <p data-es="• Implementé macros y scripts personalizados que mejoraron la eficiencia operativa y me permitieron realizar un seguimiento de los importadores ejecutados durante el día."
+                               data-en="• I implemented custom macros and scripts that improved operational efficiency and allowed me to track importers executed during the day.">• Implementé macros y scripts personalizados que mejoraron la eficiencia operativa y me permitieron realizar un seguimiento de los importadores ejecutados durante el día.</p>
+                            <p data-es="• Aplicación de técnicas avanzadas de análisis de datos con Python para descubrir insights significativos, como segmentación de clientes, comportamientos de compra y efectividad de campañas."
+                               data-en="• Application of advanced data analysis techniques with Python to discover significant insights, such as customer segmentation, purchase behaviors and campaign effectiveness.">• Aplicación de técnicas avanzadas de análisis de datos con Python para descubrir insights significativos, como segmentación de clientes, comportamientos de compra y efectividad de campañas.</p>
                         </div>
                     </div>          
                 </div>
@@ -355,26 +951,35 @@
                 <div class="timeline">
                     <div class="timeline-item right wow slideInRigh" data-wow-delay="0.1s">
                         <div class="timeline-text">
-                            <div class="timeline-date">Octubre 2021 - Abril 2022</div>
-                            <h2>Analista PQRS sección RYD - HYT</h2>
-                            <h4>Colsubsidio. Bogotá, Colombia</h4>
-                            <p>
+                            <div class="timeline-date" data-es="Octubre 2021 - Abril 2022" data-en="October 2021 - April 2022">Octubre 2021 - Abril 2022</div>
+                            <h2 data-es="Analista PQRS sección RYD - HYT" data-en="PQRS Analyst RYD - HYT section">Analista PQRS sección RYD - HYT</h2>
+                            <h4 data-es="Colsubsidio. Bogotá, Colombia" data-en="Colsubsidio. Bogotá, Colombia">Colsubsidio. Bogotá, Colombia</h4>
+                            <p data-es="Durante mi pasantía estuve a cargo de reemplazar las funciones del analista PQRSF para los negocios de Recreación y Deportes (RYD) – Hospitalidad y Turismo (HYT) del departamento de experiencia de atención al cliente de Colsubsidio."
+                               data-en="During my internship I was in charge of replacing the functions of the PQRSF analyst for the Recreation and Sports (RYD) - Hospitality and Tourism (HYT) businesses of the Colsubsidio customer service experience department.">
                                 Durante mi pasantía estuve a cargo de reemplazar las funciones del analista PQRSF para los negocios de Recreación y Deportes (RYD) – Hospitalidad y Turismo (HYT) del departamento de experiencia de atención al cliente de Colsubsidio.
                             </p>
                             <br>
-                                💻Responsabilidades:
+                                <span data-es="💻Responsabilidades:" data-en="💻Responsibilities:">💻Responsabilidades:</span>
                             <br>
-                            <p>• Realizar acercamientos con la UES sobre la experiencia de usuario.</p>
-                            <p>• Elaborar informes de volumétrica, forma y calidad de sustancia de los PQRSF de todos los RYD - HYT UES.</p>
-                            <p>• Resolución de solicitudes de usuarios y gestión de trámites recibidos ante la Superintendencia de Subsidio Familiar.</p>
-                            <p>• Realizar acercamientos con áreas funcionales para el óptimo funcionamiento de las solicitudes.</p>
-                            <p>• Crear plantillas que reduzcan los tiempos de respuesta y optimicen los tiempos de procesamiento.</p>
+                            <p data-es="• Realizar acercamientos con la UES sobre la experiencia de usuario."
+                               data-en="• Conduct approaches with the UES on user experience.">• Realizar acercamientos con la UES sobre la experiencia de usuario.</p>
+                            <p data-es="• Elaborar informes de volumétrica, forma y calidad de sustancia de los PQRSF de todos los RYD - HYT UES."
+                               data-en="• Prepare volumetric, form and substance quality reports of the PQRSF of all RYD - HYT UES.">• Elaborar informes de volumétrica, forma y calidad de sustancia de los PQRSF de todos los RYD - HYT UES.</p>
+                            <p data-es="• Resolución de solicitudes de usuarios y gestión de trámites recibidos ante la Superintendencia de Subsidio Familiar."
+                               data-en="• Resolution of user requests and management of procedures received before the Family Subsidy Superintendence.">• Resolución de solicitudes de usuarios y gestión de trámites recibidos ante la Superintendencia de Subsidio Familiar.</p>
+                            <p data-es="• Realizar acercamientos con áreas funcionales para el óptimo funcionamiento de las solicitudes."
+                               data-en="• Make approaches with functional areas for optimal performance of requests.">• Realizar acercamientos con áreas funcionales para el óptimo funcionamiento de las solicitudes.</p>
+                            <p data-es="• Crear plantillas que reduzcan los tiempos de respuesta y optimicen los tiempos de procesamiento."
+                               data-en="• Create templates that reduce response times and optimize processing times.">• Crear plantillas que reduzcan los tiempos de respuesta y optimicen los tiempos de procesamiento.</p>
                             <br>    
-                                🏆Logros:
+                                <span data-es="🏆Logros:" data-en="🏆Achievements:">🏆Logros:</span>
                             <br>
-                            <p>• Dentro de mi gestión logré incrementar los indicadores de forma y fondo en un 15% respectivamente dentro de los negocios RYD - HYT.</p>
-                            <p>• Lograr automatizar procesos dentro de la gestión del PQRSF y la gestión interna con la UES.</p>
-                            <p>• Participé en cursos de formación continua y autoaprendizaje para estar al día de las últimas tecnologías y tendencias en gestión de proyectos.</p>
+                            <p data-es="• Dentro de mi gestión logré incrementar los indicadores de forma y fondo en un 15% respectivamente dentro de los negocios RYD - HYT."
+                               data-en="• Within my management I managed to increase the form and substance indicators by 15% respectively within the RYD - HYT businesses.">• Dentro de mi gestión logré incrementar los indicadores de forma y fondo en un 15% respectivamente dentro de los negocios RYD - HYT.</p>
+                            <p data-es="• Lograr automatizar procesos dentro de la gestión del PQRSF y la gestión interna con la UES."
+                               data-en="• Achieve process automation within PQRSF management and internal management with the UES.">• Lograr automatizar procesos dentro de la gestión del PQRSF y la gestión interna con la UES.</p>
+                            <p data-es="• Participé en cursos de formación continua y autoaprendizaje para estar al día de las últimas tecnologías y tendencias en gestión de proyectos."
+                               data-en="• I participated in continuous training courses and self-learning to stay up to date with the latest technologies and trends in project management.">• Participé en cursos de formación continua y autoaprendizaje para estar al día de las últimas tecnologías y tendencias en gestión de proyectos.</p>
                             </p>
                         </div>
                     </div>          
@@ -386,27 +991,37 @@
                 <div class="timeline">
                     <div class="timeline-item left wow slideInRigh" data-wow-delay="0.1s">
                         <div class="timeline-text">
-                            <div class="timeline-date">Enero  2018 - Septiembre 2021</div>
-                            <h2>Freelance</h2>
-                            <h4>Workana. (Onlyne)</h4>
-                            <p>
+                            <div class="timeline-date" data-es="Enero  2018 - Septiembre 2021" data-en="January 2018 - September 2021">Enero  2018 - Septiembre 2021</div>
+                            <h2 data-es="Freelance" data-en="Freelance">Freelance</h2>
+                            <h4 data-es="Workana. (Onlyne)" data-en="Workana. (Online)">Workana. (Onlyne)</h4>
+                            <p data-es="Como freelance trabajé en el área de programación y diseño web, así como en la automatización de procesos mediante el uso de macros con VBA y Python. Realización de proyectos, ya sean para personas físicas u organizaciones."
+                               data-en="As a freelancer I worked in the area of web programming and design, as well as in process automation through the use of macros with VBA and Python. Carrying out projects, whether for individuals or organizations.">
                                 Como freelance trabajé en el área de programación y diseño web, así como en la automatización de procesos mediante el uso de macros con VBA y Python. Realización de proyectos, ya sean para personas físicas u organizaciones.
                             </p>
                             <br>
-                                💻Responsabilidades:
+                                <span data-es="💻Responsabilidades:" data-en="💻Responsibilities:">💻Responsabilidades:</span>
                             <br>
-                            <p>• Desarrollar sitios web personalizados utilizando tecnologías como HTML, CSS, JavaScript y PHP.</p>
-                            <p>• Implementación de sistemas de gestión de contenidos (CMS) como WordPress.</p>
-                            <p>• Creé macros personalizadas usando Visual Basic para Aplicaciones (VBA) para automatizar tareas repetitivas en hojas de cálculo de Excel.</p>
-                            <p>• Desarrollo de scripts Python para automatizar procesos de extracción, transformación y carga de datos.</p>
-                            <p>• Optimización de macros y scripts existentes para mejorar la eficiencia y el rendimiento.</p>
+                            <p data-es="• Desarrollar sitios web personalizados utilizando tecnologías como HTML, CSS, JavaScript y PHP."
+                               data-en="• Develop custom websites using technologies such as HTML, CSS, JavaScript and PHP.">• Desarrollar sitios web personalizados utilizando tecnologías como HTML, CSS, JavaScript y PHP.</p>
+                            <p data-es="• Implementación de sistemas de gestión de contenidos (CMS) como WordPress."
+                               data-en="• Implementation of content management systems (CMS) such as WordPress.">• Implementación de sistemas de gestión de contenidos (CMS) como WordPress.</p>
+                            <p data-es="• Creé macros personalizadas usando Visual Basic para Aplicaciones (VBA) para automatizar tareas repetitivas en hojas de cálculo de Excel."
+                               data-en="• I created custom macros using Visual Basic for Applications (VBA) to automate repetitive tasks in Excel spreadsheets.">• Creé macros personalizadas usando Visual Basic para Aplicaciones (VBA) para automatizar tareas repetitivas en hojas de cálculo de Excel.</p>
+                            <p data-es="• Desarrollo de scripts Python para automatizar procesos de extracción, transformación y carga de datos."
+                               data-en="• Development of Python scripts to automate data extraction, transformation and loading processes.">• Desarrollo de scripts Python para automatizar procesos de extracción, transformación y carga de datos.</p>
+                            <p data-es="• Optimización de macros y scripts existentes para mejorar la eficiencia y el rendimiento."
+                               data-en="• Optimization of existing macros and scripts to improve efficiency and performance.">• Optimización de macros y scripts existentes para mejorar la eficiencia y el rendimiento.</p>
                             <br>
-                                🏆Logros:
+                                <span data-es="🏆Logros:" data-en="🏆Achievements:">🏆Logros:</span>
                             <br>
-                            <p>• Recibí consistentemente comentarios positivos de los clientes con respecto a la calidad del trabajo entregado, la comunicación efectiva y la capacidad para cumplir con los requisitos del proyecto.</p>
-                            <p>• Implementé estrategias de SEO (Search Engine Optimization) que incrementaron el tráfico orgánico en un 50% en un período de seis meses.</p>
-                            <p>• Diseñé y desarrollé soluciones de automatización de procesos utilizando VBA en Microsoft Excel, reduciendo los tiempos de trabajo manual en un 70% y minimizando errores en el ingreso de datos.</p>
-                            <p>• Lideré y gestioné múltiples proyectos simultáneos utilizando Microsoft Project, asegurando la entrega dentro del plazo y presupuesto establecidos.</p>
+                            <p data-es="• Recibí consistentemente comentarios positivos de los clientes con respecto a la calidad del trabajo entregado, la comunicación efectiva y la capacidad para cumplir con los requisitos del proyecto."
+                               data-en="• I consistently received positive feedback from clients regarding the quality of work delivered, effective communication and ability to meet project requirements.">• Recibí consistentemente comentarios positivos de los clientes con respecto a la calidad del trabajo entregado, la comunicación efectiva y la capacidad para cumplir con los requisitos del proyecto.</p>
+                            <p data-es="• Implementé estrategias de SEO (Search Engine Optimization) que incrementaron el tráfico orgánico en un 50% en un período de seis meses."
+                               data-en="• I implemented SEO (Search Engine Optimization) strategies that increased organic traffic by 50% over a period of six months.">• Implementé estrategias de SEO (Search Engine Optimization) que incrementaron el tráfico orgánico en un 50% en un período de seis meses.</p>
+                            <p data-es="• Diseñé y desarrollé soluciones de automatización de procesos utilizando VBA en Microsoft Excel, reduciendo los tiempos de trabajo manual en un 70% y minimizando errores en el ingreso de datos."
+                               data-en="• I designed and developed process automation solutions using VBA in Microsoft Excel, reducing manual work times by 70% and minimizing errors in data entry.">• Diseñé y desarrollé soluciones de automatización de procesos utilizando VBA en Microsoft Excel, reduciendo los tiempos de trabajo manual en un 70% y minimizando errores en el ingreso de datos.</p>
+                            <p data-es="• Lideré y gestioné múltiples proyectos simultáneos utilizando Microsoft Project, asegurando la entrega dentro del plazo y presupuesto establecidos."
+                               data-en="• I led and managed multiple simultaneous projects using Microsoft Project, ensuring delivery within the established deadline and budget.">• Lideré y gestioné múltiples proyectos simultáneos utilizando Microsoft Project, asegurando la entrega dentro del plazo y presupuesto establecidos.</p>
                             </p>
                         </div>
                     </div>          
@@ -420,17 +1035,17 @@
         <div class="portfolio" id="portfolio">
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>Mi Portfolio</p>
-                    <h2>Portfolio de Trabajos</h2>
+                    <p data-i18n="portfolio.title">Mi Portfolio</p>
+                    <h2 data-i18n="portfolio.subtitle">Portfolio de Trabajos</h2>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <ul id="portfolio-filter">
-                            <li data-filter="*" class="filter-active">Todo</li>
-                            <li data-filter=".filter-1">Diseño Web</li>
-                            <li data-filter=".filter-2">Análisis de Datos </li>
-                            <li data-filter=".filter-3">Diseño de Marca</li>
-                            <li data-filter=".filter-4">Automatización de procesos</li>
+                            <li data-filter="*" class="filter-active" data-i18n="portfolio.filterAll">Todo</li>
+                            <li data-filter=".filter-1" data-i18n="portfolio.filterWeb">Diseño Web</li>
+                            <li data-filter=".filter-2" data-i18n="portfolio.filterData">Análisis de Datos </li>
+                            <li data-filter=".filter-3" data-i18n="portfolio.filterBrand">Diseño de Marca</li>
+                            <li data-filter=".filter-4" data-i18n="portfolio.filterAutomation">Automatización de procesos</li>
                         </ul>
                     </div>
                 </div>
@@ -441,8 +1056,8 @@
                                 <img src="img/WebEcobambu.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Aseo Eco Bambu Web</h3>
-                                <a class="btn" href="WebEcoBambu.html">+</a>
+                                <h3 data-es="Aseo Eco Bambu Web" data-en="Eco Bambu Cleaning Website">Aseo Eco Bambu Web</h3>
+                                <a class="btn" href="projects/WebEcoBambu.html" data-title-es="Ver proyecto: Aseo Eco Bambu Web" data-title-en="View project: Eco Bambu Cleaning Web">+</a>
                             </div>
                         </div>
                     </div>
@@ -452,8 +1067,8 @@
                                 <img src="img/P&G view.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>P&G CEO Challenge 2021</h3>
-                                <a class="btn" href="https://youtu.be/arJumu5RNh0">+</a>
+                                <h3 data-es="P&G CEO Challenge 2021" data-en="P&G CEO Challenge 2021">P&G CEO Challenge 2021</h3>
+                                <a class="btn" href="https://youtu.be/arJumu5RNh0" target="_blank">+</a>
                             </div>
                         </div>
                     </div>
@@ -463,8 +1078,8 @@
                                 <img src="img/Portafolio de Inversiones view.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Portafolio de Acciones</h3>
-                                <a class="btn" href="Portafolio de Acciones.html">+</a>
+                                <h3 data-es="Portafolio de Acciones" data-en="Stock Portfolio">Portafolio de Acciones</h3>
+                                <a class="btn" href="projects/Portafolio_de_Acciones.html" data-title-es="Ver proyecto: Portafolio de Acciones" data-title-en="View project: Stock Portfolio">+</a>
                             </div>
                         </div>
                     </div>
@@ -474,8 +1089,8 @@
                                 <img src="img/Wissen.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Wissen</h3>
-                                <a class="btn" href="Wissen.html">+</a>
+                                <h3 data-es="Wissen" data-en="Wissen">Wissen</h3>
+                                <a class="btn" href="projects/Wissen.html" data-title-es="Ver proyecto: Wissen" data-title-en="View project: Wissen">+</a>
                             </div>
                         </div>
                     </div>
@@ -485,8 +1100,8 @@
                                 <img src="img/Aseo Ecobambu view.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Aseo Eco Bambu</h3>
-                                <a class="btn" href="EcoBambu.html">+</a>
+                                <h3 data-es="Aseo Eco Bambu" data-en="Eco Bambu Cleaning">Aseo Eco Bambu</h3>
+                                <a class="btn" href="projects/EcoBambu.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -496,8 +1111,8 @@
                                 <img src="img/Data_Viewer.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Data Viewer</h3>
-                                <a class="btn" href="Data Viewer.html">+</a>
+                                <h3 data-es="Data Viewer" data-en="Data Viewer">Data Viewer</h3>
+                                <a class="btn" href="projects/Data_Viewer.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -507,8 +1122,8 @@
                                 <img src="img/Teleperformance.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Analisis de <br>Indicadores</br></h3>
-                                <a class="btn" href="Analisis TP.html">+</a>
+                                <h3 data-es="Analisis de <br>Indicadores</br>" data-en="Performance Indicators <br>Analysis</br>">Analisis de <br>Indicadores</br></h3>
+                                <a class="btn" href="projects/Analisis_TP.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -518,8 +1133,8 @@
                                 <img src="img/Alianzasrvice.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Alianza Service</h3>
-                                <a class="btn" href="Alianza Service.html">+</a>
+                                <h3 data-es="Alianza Service" data-en="Alianza Service">Alianza Service</h3>
+                                <a class="btn" href="projects/Alianza_Service.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -529,8 +1144,8 @@
                                 <img src="img/Formulario.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Automatización Formato <br>Unico de Notificación</br></h3>
-                                <a class="btn" href="Formulario.html">+</a>
+                                <h3 data-es="Automatización Formato <br>Unico de Notificación</br>" data-en="Single Notification <br>Format Automation</br>">Automatización Formato <br>Unico de Notificación</br></h3>
+                                <a class="btn" href="projects/Formulario.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -540,8 +1155,8 @@
                                 <img src="img/contrato.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Automatización Contrato <br>Propiedad Horizontal</br></h3>
-                                <a class="btn" href="Propiedad Horizontal.html">+</a>
+                                <h3 data-es="Automatización Contrato <br>Propiedad Horizontal</br>" data-en="Horizontal Property <br>Contract Automation</br>">Automatización Contrato <br>Propiedad Horizontal</br></h3>
+                                <a class="btn" href="projects/Propiedad_Horizontal.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -551,8 +1166,8 @@
                                 <img src="img/wtw.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>WTW / Categorizacion<br>por Vademecum</br></h3>
-                                <a class="btn" href="WTW Categorizacion por Vademecum.html">+</a>
+                                <h3 data-es="WTW / Categorizacion<br>por Vademecum</br>" data-en="WTW / Vademecum <br>Categorization</br>">WTW / Categorizacion<br>por Vademecum</br></h3>
+                                <a class="btn" href="projects/WTW_Categorizacion_por_Vademecum.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -562,8 +1177,8 @@
                                 <img src="img/Cenit.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Dashboard reporte <br>general CENIT</br></h3>
-                                <a class="btn" href="CENIT.html">+</a>
+                                <h3 data-es="Dashboard reporte <br>general CENIT</br>" data-en="CENIT General <br>Report Dashboard</br>">Dashboard reporte <br>general CENIT</br></h3>
+                                <a class="btn" href="projects/CENIT.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -573,8 +1188,8 @@
                                 <img src="img/email.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Automatización de envio <br>de KPI por correo</br></h3>
-                                <a class="btn" href="Emails automatizacion por KPI.html">+</a>
+                                <h3 data-es="Automatización de envio <br>de KPI por correo</br>" data-en="KPI Email Sending <br>Automation</br>">Automatización de envio <br>de KPI por correo</br></h3>
+                                <a class="btn" href="projects/Emails_automatizacion_por_KPI.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -584,8 +1199,8 @@
                                 <img src="img/importador.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Validador de importadores <br>de SQL</br></h3>
-                                <a class="btn" href="Verificador de Importador.html">+</a>
+                                <h3 data-es="Validador de importadores <br>de SQL</br>" data-en="SQL Importers <br>Validator</br>">Validador de importadores <br>de SQL</br></h3>
+                                <a class="btn" href="projects/Verificador_de_Importador.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -595,8 +1210,8 @@
                                 <img src="img/catedral.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Automatización de ingreso <br>de datos</br></h3>
-                                <a class="btn" href="catedral de manizales.html">+</a>
+                                <h3 data-es="Automatización de ingreso <br>de datos</br>" data-en="Data Entry <br>Automation</br>">Automatización de ingreso <br>de datos</br></h3>
+                                <a class="btn" href="projects/catedral_de_manizales.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -606,8 +1221,8 @@
                                 <img src="img/ecopetrol.png" alt="Image">
                             </div>
                             <div class="portfolio-text">
-                                <h3>Automatización API <br>visual Ecopetrol</br></h3>
-                                <a class="btn" href="Api ecopetrol.html">+</a>
+                                <h3 data-es="Automatización API <br>visual Ecopetrol</br>" data-en="Ecopetrol Visual <br>API Automation</br>">Automatización API <br>visual Ecopetrol</br></h3>
+                                <a class="btn" href="projects/Api_ecopetrol.html">+</a>
                             </div>
                         </div>
                     </div>
@@ -621,7 +1236,7 @@
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
                     <p>Mi Portfolio</p>
-                    <h2>Proyectos en Curso</h2>
+                    <h2 data-es="Proyectos en Curso" data-en="Current Projects">Proyectos en Curso</h2>
                 </div>
                 <div class="row portfolio-container">
                     <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item filter-1 filter-2 filter-3 filter-4 wow fadeInUp" data-wow-delay="0.0s">
@@ -647,19 +1262,55 @@
         <div class="contact wow fadeInUp" data-wow-delay="0.1s" id="contact">
             <div class="container-fluid">
                 <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-4"></div>
-                        <div class="banner wow zoomIn" data-wow-delay="0.1s">
-                            <div class="container">
-                                <div class="section-header text-center">
-                                    <img src="img/contacto.png" alt="Image">
-                                    <h2>Puedes <span>Contáctame </span>en</h2>
+                    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                        <p data-i18n="contact.title">CONTÁCTAME</p>
+                        <h2 data-i18n="contact.subtitle">Conectemos y Trabajemos Juntos</h2>
+                    </div>
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="contact-info-card">
+                                <div class="contact-image-wrapper">
+                                    <img src="img/contacto.png" alt="Contacto" class="contact-main-img">
                                 </div>
-                                <div class="container banner-text">
-                                    <p>
-                                        LinkedIn como Michel Enrique Abello Betancourt. Si deseas conversar de manera más detallada sobre mis aptitudes o deseas conoces más sobre mi trabajo; dejo a tu disposición, el enlace directo a mi perfil donde me puedes contactar. 
+                                <div class="contact-content">
+                                    <h3 data-es="¿Listo para Colaborar?" data-en="Ready to Collaborate?">¿Listo para Colaborar?</h3>
+                                    <p data-es="Estoy disponible para discutir oportunidades de colaboración, proyectos de análisis de datos, automatización de procesos o consultoría en Business Intelligence. Si deseas conversar de manera más detallada sobre mis aptitudes o conocer más sobre mi trabajo, te invito a conectar conmigo a través de LinkedIn."
+                                       data-en="I am available to discuss collaboration opportunities, data analysis projects, process automation or Business Intelligence consulting. If you want to talk in more detail about my skills or learn more about my work, I invite you to connect with me through LinkedIn.">
+                                        Estoy disponible para discutir oportunidades de colaboración, proyectos de análisis de datos, 
+                                        automatización de procesos o consultoría en Business Intelligence. Si deseas conversar de manera 
+                                        más detallada sobre mis aptitudes o conocer más sobre mi trabajo, te invito a conectar conmigo 
+                                        a través de LinkedIn.
                                     </p>
-                                    <a class="btn" href="https://www.linkedin.com/in/michel-abello/">Contacto </a>
+                                    <div class="contact-methods">
+                                        <div class="contact-method-item">
+                                            <i class="fab fa-linkedin fa-3x"></i>
+                                            <h4 data-es="LinkedIn" data-en="LinkedIn">LinkedIn</h4>
+                                            <p data-es="Michel Enrique Abello Betancourt" data-en="Michel Enrique Abello Betancourt">Michel Enrique Abello Betancourt</p>
+                                            <a class="btn btn-contact" href="https://www.linkedin.com/in/michel-abello/" target="_blank">
+                                                <i class="fab fa-linkedin"></i> <span data-es="Conectar en LinkedIn" data-en="Connect on LinkedIn">Conectar en LinkedIn</span>
+                                            </a>
+                                        </div>
+                                        <div class="contact-method-item">
+                                            <i class="fab fa-github fa-3x"></i>
+                                            <h4 data-es="GitHub" data-en="GitHub">GitHub</h4>
+                                            <p data-es="Revisa mis proyectos y código" data-en="Check out my projects and code">Revisa mis proyectos y código</p>
+                                            <a class="btn btn-contact" href="https://github.com/MichelAbelloB" target="_blank">
+                                                <i class="fab fa-github"></i> <span data-es="Ver Repositorios" data-en="View Repositories">Ver Repositorios</span>
+                                            </a>
+                                        </div>
+                                        <div class="contact-method-item">
+                                            <i class="fab fa-behance fa-3x"></i>
+                                            <h4 data-es="Behance" data-en="Behance">Behance</h4>
+                                            <p data-es="Portafolio de diseño" data-en="Design portfolio">Portafolio de diseño</p>
+                                            <a class="btn btn-contact" href="https://www.behance.net/gallery/142669769/Personal-Branding" target="_blank">
+                                                <i class="fab fa-behance"></i> <span data-es="Ver Portafolio" data-en="View Portfolio">Ver Portafolio</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="availability-banner">
+                                        <i class="fa fa-check-circle"></i>
+                                        <span data-es="Disponible para proyectos freelance y oportunidades laborales" data-en="Available for freelance projects and job opportunities">Disponible para proyectos freelance y oportunidades laborales</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -674,8 +1325,8 @@
         <div class="blog" id="Articles">
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>PUBLICACIONES</p>
-                    <h2>Últimos Artículos</h2>
+                    <p data-i18n="articles.title">PUBLICACIONES</p>
+                    <h2 data-i18n="articles.subtitle">Últimos Artículos</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
@@ -684,13 +1335,15 @@
                                 <img src="img/Articles.2.png" alt="Blog">
                             </div>
                             <div class="blog-text">
-                                <h2>Implementación de un RPA para la Extracción y Análisis en Tiempo Real de Datos de Ecopetrol desde la Bolsa de Valores de Colombia: Integración con SQL y Visualización Web en Localhost.</h2>
+                                <h2 data-es="Implementación de un RPA para la Extracción y Análisis en Tiempo Real de Datos de Ecopetrol desde la Bolsa de Valores de Colombia: Integración con SQL y Visualización Web en Localhost."
+                                    data-en="Implementation of an RPA for Real-Time Extraction and Analysis of Ecopetrol Data from the Colombia Stock Exchange: Integration with SQL and Web Visualization on Localhost.">Implementación de un RPA para la Extracción y Análisis en Tiempo Real de Datos de Ecopetrol desde la Bolsa de Valores de Colombia: Integración con SQL y Visualización Web en Localhost.</h2>
                                 <div class="blog-meta">
-                                    <p><i class="far fa-user"></i>Michel Abello</p>
-                                    <p><i class="far fa-list-alt"></i>Business Intelligence</p>
-                                    <p><i class="far fa-calendar-alt"></i>24-nov-2024</p>
+                                    <p><i class="far fa-user"></i><span data-es="Michel Abello" data-en="Michel Abello">Michel Abello</span></p>
+                                    <p><i class="far fa-list-alt"></i><span data-es="Business Intelligence" data-en="Business Intelligence">Business Intelligence</span></p>
+                                    <p><i class="far fa-calendar-alt"></i><span data-es="24-nov-2024" data-en="Nov-24-2024">24-nov-2024</span></p>
                                 </div>
-                                <p>
+                                <p data-es="Este proyecto de grado se enfoca en la implementación de un sistema automatizado (RPA) para la extracción y análisis en tiempo real de datos de la empresa Ecopetrol desde la Bolsa de Valores de Colombia. El RPA desarrollado recolecta información crítica de la página web, la cual es cargada automáticamente en una base de datos SQL. Una vez almacenados, los datos son analizados en tiempo real, y los resultados más relevantes son visualizados en una API web alojada en localhost. Este sistema no solo automatiza el proceso de obtención de datos, sino que también permite una monitorización continua y en tiempo real de las variables más importantes, facilitando la toma de decisiones basada en información actualizada. La integración entre el RPA, SQL y la API web garantiza un flujo de trabajo eficiente y efectivo, optimizando la gestión de la información financiera de Ecopetrol."
+                                   data-en="This degree project focuses on implementing an automated system (RPA) for real-time extraction and analysis of Ecopetrol company data from the Colombia Stock Exchange. The developed RPA collects critical information from the website, which is automatically loaded into an SQL database. Once stored, the data is analyzed in real-time, and the most relevant results are visualized in a web API hosted on localhost. This system not only automates the data collection process but also enables continuous real-time monitoring of the most important variables, facilitating decision-making based on updated information. The integration between RPA, SQL and the web API ensures an efficient and effective workflow, optimizing the management of Ecopetrol's financial information.">
                                     Este proyecto de grado se enfoca en la implementación de un sistema automatizado (RPA) 
                                     para la extracción y análisis en tiempo real de datos de la empresa Ecopetrol desde la Bolsa 
                                     de Valores de Colombia. El RPA desarrollado recolecta información crítica de la página web, la 
@@ -702,7 +1355,9 @@
                                     integración entre el RPA, SQL y la API web garantiza un flujo de trabajo eficiente y efectivo, 
                                     optimizando la gestión de la información financiera de Ecopetrol.
                                 </p>
-                                <a class="btn" href="https://drive.google.com/file/d/1PyJ0-sZSnxFZTzTzPk4yH4-nVSXJlj9j/view?usp=sharing">Paper Completo  <i class="fa fa-angle-right"></i></a>
+                                <button class="btn" onclick="openPdfViewer('documents/Implementación de un RPA para la Extracción y Análisis en Tiempo Real de Datos de Ecopetrol desde la Bolsa de Valores de Colombia Integración con SQL y Visualización Web.pdf', 'RPA Ecopetrol - Michel Abello')">
+                                    <i class="far fa-file-pdf"></i> <span data-es="Ver Documento Completo" data-en="View Full Document">Ver Documento Completo</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -712,13 +1367,15 @@
                                 <img src="img/Articles.1.png" alt="Blog">
                             </div>
                             <div class="blog-text">
-                                <h2>El comercio electrónico como eje de desarrollo sostenible y su relación con las ventas totales de empresas minoristas comerciales en Colombia: un análisis de su actividad económica entre 2013 y 2017</h2>
+                                <h2 data-es="El comercio electrónico como eje de desarrollo sostenible y su relación con las ventas totales de empresas minoristas comerciales en Colombia: un análisis de su actividad económica entre 2013 y 2017"
+                                    data-en="E-commerce as an axis of sustainable development and its relationship with total sales of commercial retail companies in Colombia: an analysis of their economic activity between 2013 and 2017">El comercio electrónico como eje de desarrollo sostenible y su relación con las ventas totales de empresas minoristas comerciales en Colombia: un análisis de su actividad económica entre 2013 y 2017</h2>
                                 <div class="blog-meta">
-                                    <p><i class="far fa-user"></i>Michel Abello, Juan Corrales</p>
-                                    <p><i class="far fa-list-alt"></i>E-commerce</p>
-                                    <p><i class="far fa-calendar-alt"></i>07-Ago-2020</p>
+                                    <p><i class="far fa-user"></i><span data-es="Michel Abello, Juan Corrales" data-en="Michel Abello, Juan Corrales">Michel Abello, Juan Corrales</span></p>
+                                    <p><i class="far fa-list-alt"></i><span data-es="E-commerce" data-en="E-commerce">E-commerce</span></p>
+                                    <p><i class="far fa-calendar-alt"></i><span data-es="07-Ago-2020" data-en="Aug-07-2020">07-Ago-2020</span></p>
                                 </div>
-                                <p>
+                                <p data-es="El comercio electrónico (CE) se ha convertido en un tema de interés para la comunidad académica y empresarial. Muchos estudios se han desarrollado en todo el mundo estudiando la forma en que se creó, su adopción, su influencia en los indicadores financieros, la forma en que el PIB de un país puede verse afectado, entre otros. Sin embargo, no se ha encontrado literatura que presente la relación entre las ventas operativas y las ventas totales en el comercio digital realizadas de acuerdo con la actividad económica del comercio minorista en Colombia."
+                                   data-en="E-commerce (EC) has become a topic of interest for the academic and business community. Many studies have been developed around the world studying the way it was created, its adoption, its influence on financial indicators, the way in which a country's GDP can be affected, among others. However, no literature has been found that presents the relationship between operational sales and total sales in digital commerce carried out according to the economic activity of retail trade in Colombia.">
                                     El comercio electrónico (CE) se ha convertido en
                                     un tema de interés para la comunidad académica y
                                     empresarial. Muchos estudios se han desarrollado
@@ -732,7 +1389,8 @@
                                     actividad económica del comercio minorista en
                                     Colombia.
                                 </p>
-                                <p>
+                                <p data-es="Es por ello que el presente documento tiene como objetivo determinar la correlación entre las ventas totales y las ventas desarrolladas a través del comercio electrónico para determinar el estado actual y poder aplicar estrategias que permitan el desarrollo sostenible empresarial desde un enfoque digital."
+                                   data-en="That is why this document aims to determine the correlation between total sales and sales developed through e-commerce to determine the current state and be able to apply strategies that allow sustainable business development from a digital approach.">
                                     Es por ello que el presente documento tiene como
                                     objetivo determinar la correlación entre las ventas
                                     totales y las ventas desarrolladas a través del
@@ -741,8 +1399,12 @@
                                     desarrollo sostenible empresarial desde un enfoque
                                     digital.
                                 </p>
-                                <a class="btn" href="https://drive.google.com/file/d/12zLlEPNNl6_WxaWNwXSkPoqoHo5rOhWj/view?usp=sharing">Paper  <i class="fa fa-angle-right"></i></a>
-                                <a class="btn" href="https://drive.google.com/file/d/1hLAVFhQs1JGbC1a-6KsLI-rwNUQsVZNK/view?usp=drive_link">Paper Completo  <i class="fa fa-angle-right"></i></a>
+                                <button class="btn" onclick="openPdfViewer('documents/LIBRO ACTAS III CONGRESO TOMO II MFGG.pdf', 'E-commerce Colombia - Resumen')">
+                                    <i class="far fa-file-pdf"></i> <span data-es="Ver Resumen" data-en="View Summary">Ver Resumen</span>
+                                </button>
+                                <button class="btn" onclick="openPdfViewer('documents/Electronic commerce and its relationship with the total sales of commercial retail companies in Colombia an analysis of their economic activity between 2013- 2017.pdf', 'E-commerce Colombia - Documento Completo')">
+                                    <i class="far fa-file-pdf"></i> <span data-es="Ver Documento Completo" data-en="View Full Document">Ver Documento Completo</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -750,6 +1412,25 @@
             </div>
         </div>
         <!-- Blog End -->
+
+        <!-- Visualizador de PDF Modal (Simple con iframe) -->
+        <div class="pdf-modal" id="pdfModal">
+            <div class="modal-overlay" onclick="closePdfModal()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="closePdfModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="modal-header">
+                    <h3 id="modalTitle" data-es="Documento PDF" data-en="PDF Document">Documento PDF</h3>
+                </div>
+                <div class="modal-body">
+                    <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
 
 
         <!-- Footer Start -->
@@ -768,7 +1449,8 @@
                     </div>
                 </div>
                 <div class="container copyright">
-                    <p>&copy; <a href="#">Michel Abello</a>, Todos los derechos reservados | Diseñado por Michel.A</a></p>
+                    <p data-es="&copy; <a href='#'>Michel Abello</a>, Todos los derechos reservados | Diseñado por Michel.A"
+                       data-en="&copy; <a href='#'>Michel Abello</a>, All rights reserved | Designed by Michel.A">&copy; <a href="#">Michel Abello</a>, Todos los derechos reservados | Diseñado por Michel.A</a></p>
                 </div>
             </div>
         </div>
@@ -788,17 +1470,53 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/typed/typed.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/isotope/isotope.pkgd.min.js"></script>
-        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
         
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
-        <!-- Lenguage Javascript -->
-        <script src="js/language.js"></script>
+        <!-- Internationalization -->
+        <script src="js/i18n.js"></script>
+
+        <!-- Visualizador de PDF Simple con iframe -->
+        <script>
+            // Función para abrir PDF en modal
+            function openPdfViewer(url, title) {
+                const modal = document.getElementById('pdfModal');
+                const modalTitle = document.getElementById('modalTitle');
+                const pdfViewer = document.getElementById('pdfViewer');
+                
+                if (modal && modalTitle && pdfViewer) {
+                    modalTitle.textContent = title;
+                    pdfViewer.src = url;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            // Función para cerrar modal
+            function closePdfModal() {
+                const modal = document.getElementById('pdfModal');
+                const pdfViewer = document.getElementById('pdfViewer');
+                
+                if (modal && pdfViewer) {
+                    modal.classList.remove('active');
+                    pdfViewer.src = '';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Cerrar modal con tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePdfModal();
+                }
+            });
+        </script>
     </body>
 </html>
